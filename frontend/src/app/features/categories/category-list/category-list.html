@@ -1,0 +1,19 @@
+<h2>Liste des catégories</h2>
+<a routerLink="/categories/create">+ Nouvelle catégorie</a>
+
+<p *ngIf="loading()">Chargement...</p>
+
+<p *ngIf="errorMessage()" class="error">{{ errorMessage() }}</p>
+
+<table *ngIf="!loading() && !errorMessage()">
+  <thead>
+    <tr>
+      <th>Libellé</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of categories()">
+      <td><a [routerLink]="['/categories', category.id]">{{ category.libelle }}</a></td>
+    </tr>
+  </tbody>
+</table>

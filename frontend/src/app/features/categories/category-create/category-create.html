@@ -1,0 +1,14 @@
+<h2>Créer une catégorie</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>
+    Libellé :
+    <input type="text" formControlName="libelle">
+  </label>
+
+  <button type="submit" [disabled]="form.invalid">Créer</button>
+</form>
+
+@if (errorMessage()) {
+  <p class="error">{{ errorMessage() }}</p>
+}

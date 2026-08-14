@@ -1,0 +1,24 @@
+<h2>Liste des inscriptions</h2>
+
+<p *ngIf="loading()">Chargement...</p>
+
+<p *ngIf="errorMessage()" class="error">{{ errorMessage() }}</p>
+
+<table *ngIf="!loading() && !errorMessage()">
+  <thead>
+    <tr>
+      <th>Utilisateur</th>
+      <th>Événement</th>
+      <th>Date d'inscription</th>
+      <th>Statut</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let registration of registrations()">
+      <td>{{ registration.userNomComplet }}</td>
+      <td>{{ registration.eventTitre }}</td>
+      <td>{{ registration.dateInscription }}</td>
+      <td>{{ registration.statut }}</td>
+    </tr>
+  </tbody>
+</table>

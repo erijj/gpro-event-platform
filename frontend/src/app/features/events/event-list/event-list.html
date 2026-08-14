@@ -1,0 +1,29 @@
+<h2>Liste des événements</h2>
+<a routerLink="/events/create">+ Nouvel événement</a>
+
+<p *ngIf="loading()">Chargement...</p>
+
+<p *ngIf="errorMessage()" class="error">{{ errorMessage() }}</p>
+
+<table *ngIf="!loading() && !errorMessage()">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Date</th>
+      <th>Lieu</th>
+      <th>Catégorie</th>
+      <th>Places restantes</th>
+      <th>Statut</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let event of events()">
+      <td><a [routerLink]="['/events', event.id]">{{ event.titre }}</a></td>
+      <td>{{ event.dateHeure }}</td>
+      <td>{{ event.lieu }}</td>
+      <td>{{ event.category.libelle }}</td>
+      <td>{{ event.placesRestantes }} / {{ event.capaciteMax }}</td>
+      <td>{{ event.statut }}</td>
+    </tr>
+  </tbody>
+</table>

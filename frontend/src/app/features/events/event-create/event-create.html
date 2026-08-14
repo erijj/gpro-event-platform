@@ -1,0 +1,44 @@
+<h2>Créer un événement</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <label>
+    Titre :
+    <input type="text" formControlName="titre">
+  </label>
+
+  <label>
+    Description :
+    <textarea formControlName="description"></textarea>
+  </label>
+
+  <label>
+    Date et heure :
+    <input type="datetime-local" formControlName="dateHeure">
+  </label>
+
+  <label>
+    Lieu :
+    <input type="text" formControlName="lieu">
+  </label>
+
+  <label>
+    Capacité max :
+    <input type="number" formControlName="capaciteMax">
+  </label>
+
+  <label>
+    Catégorie :
+    <select formControlName="categoryId">
+      <option [value]="null">-- Choisir --</option>
+      @for (cat of categories(); track cat.id) {
+        <option [value]="cat.id">{{ cat.libelle }}</option>
+      }
+    </select>
+  </label>
+
+  <button type="submit" [disabled]="form.invalid">Créer</button>
+</form>
+
+@if (errorMessage()) {
+  <p class="error">{{ errorMessage() }}</p>
+}
