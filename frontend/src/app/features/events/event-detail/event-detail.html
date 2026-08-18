@@ -13,4 +13,15 @@
 
   <a [routerLink]="['/events', event()!.id, 'edit']">Modifier</a>
   <button (click)="onDelete()">Supprimer</button>
+
+  @if (currentUserService.currentUserId() && event()!.placesRestantes > 0) {
+  <button (click)="onInscrire()">S'inscrire</button>
+} @else if (event()!.placesRestantes === 0) {
+  <p>Plus de places disponibles</p>
+}
+
+@if (inscriptionMessage()) {
+  <p>{{ inscriptionMessage() }}</p>
+}
+
 }

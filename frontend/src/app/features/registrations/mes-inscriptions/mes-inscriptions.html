@@ -1,0 +1,36 @@
+<h2>Mes inscriptions</h2>
+
+@if (!currentUserService.currentUserId()) {
+  <p>Sélectionnez un utilisateur pour voir ses inscriptions.</p>
+} @else if (loading()) {
+  <p>Chargement...</p>
+} @else if (errorMessage()) {
+  <p>{{ errorMessage() }}</p>
+} @else if (inscriptions().length === 0) {
+  <p>Aucune inscription.</p>
+} @else {
+  <table>
+  <thead>
+    <tr>
+      <th>Événement</th>
+      <th>Date d'inscription</th>
+      <th>Statut</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (r of inscriptions(); track r.id) {
+      <tr>
+        <td>{{ r.eventTitre }}</td>
+        <td>{{ r.dateInscription }}</td>
+        <td>{{ r.statut }}</td>
+        <td>
+          @if (r.statut === 'CONFIRMEE') {
+            <button (click)="onAnnuler(r.id)">Annuler</button>
+          }
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+}

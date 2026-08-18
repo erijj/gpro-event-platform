@@ -1,0 +1,40 @@
+<h2>Modifier l'utilisateur</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <input formControlName="nom" placeholder="Nom" />
+    @if (form.get('nom')!.invalid && form.get('nom')!.touched) {
+      <p class="erreur">Le nom est obligatoire</p>
+    }
+  </div>
+
+  <div>
+    <input formControlName="prenom" placeholder="Prénom" />
+    @if (form.get('prenom')!.invalid && form.get('prenom')!.touched) {
+      <p class="erreur">Le prénom est obligatoire</p>
+    }
+  </div>
+
+  <div>
+    <input formControlName="email" placeholder="Email" type="email" />
+    @if (form.get('email')!.touched) {
+      @if (form.get('email')!.hasError('required')) {
+        <p class="erreur">L'email est obligatoire</p>
+      }
+      @if (form.get('email')!.hasError('email')) {
+        <p class="erreur">Format d'email invalide</p>
+      }
+    }
+  </div>
+
+  <select formControlName="role">
+    <option value="ROLE_USER">Utilisateur</option>
+    <option value="ROLE_ADMIN">Admin</option>
+  </select>
+
+  @if (error()) {
+    <p class="erreur">{{ error() }}</p>
+  }
+
+  <button type="submit" [disabled]="form.invalid || loading()">Modifier</button>
+</form>

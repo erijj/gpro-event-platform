@@ -18,4 +18,17 @@ export class RegistrationService {
   getById(id: number): Observable<Registration> {
     return this.http.get<Registration>(`${this.baseUrl}/${id}`);
   }
+
+  create(data: { userId: number; eventId: number }): Observable<Registration> {
+  return this.http.post<Registration>(this.baseUrl, data);
+  }
+
+   annuler(id: number): Observable<void> {
+   return this.http.delete<void>(`${this.baseUrl}/${id}`);
+   }
+
+   getByUser(userId: number): Observable<Registration[]> {
+   return this.http.get<Registration[]>(`${this.baseUrl}/user/${userId}`);
+}
+
 }

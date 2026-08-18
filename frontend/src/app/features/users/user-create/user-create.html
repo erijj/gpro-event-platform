@@ -1,0 +1,49 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <input formControlName="nom" placeholder="Nom" />
+    @if (form.get('nom')!.invalid && form.get('nom')!.touched) {
+      <p class="erreur">Le nom est obligatoire</p>
+    }
+  </div>
+
+  <div>
+    <input formControlName="prenom" placeholder="Prénom" />
+    @if (form.get('prenom')!.invalid && form.get('prenom')!.touched) {
+      <p class="erreur">Le prénom est obligatoire</p>
+    }
+  </div>
+
+  <div>
+    <input formControlName="email" placeholder="Email" type="email" />
+    @if (form.get('email')!.touched) {
+      @if (form.get('email')!.hasError('required')) {
+        <p class="erreur">L'email est obligatoire</p>
+      }
+      @if (form.get('email')!.hasError('email')) {
+        <p class="erreur">Format d'email invalide</p>
+      }
+    }
+  </div>
+
+  <div>
+    <input formControlName="password" placeholder="Mot de passe" type="password" />
+    @if (form.get('password')!.touched) {
+      @if (form.get('password')!.hasError('required')) {
+        <p class="erreur">Le mot de passe est obligatoire</p>
+      }
+      @if (form.get('password')!.hasError('minlength')) {
+        <p class="erreur">Le mot de passe doit contenir au moins 8 caractères</p>
+      }
+    }
+  </div>
+
+  <select formControlName="role">
+    <option value="ROLE_USER">Utilisateur</option>
+    <option value="ROLE_ADMIN">Admin</option>
+  </select>
+
+  @if (error()) {
+    <p class="erreur">{{ error() }}</p>
+  }
+
+  <button type="submit" [disabled]="form.invalid || loading()">Créer</button>

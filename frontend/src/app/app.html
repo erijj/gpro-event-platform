@@ -1,1 +1,15 @@
 <router-outlet></router-outlet>
+<header>
+  <label>Utilisateur actif :</label>
+  <select (change)="onUserChange($event)">
+    <option [selected]="!currentUserService.currentUserId()">-- Choisir --</option>
+    @for (u of users(); track u.id) {
+      <option [value]="u.id" [selected]="u.id === currentUserService.currentUserId()">
+        {{ u.prenom }} {{ u.nom }}
+      </option>
+    }
+  </select>
+</header>
+<a routerLink="/mes-inscriptions">Mes inscriptions</a>
+
+<router-outlet />
