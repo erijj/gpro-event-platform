@@ -16,7 +16,7 @@ import org.hibernate.type.SqlTypes;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements org.springframework.security.core.userdetails.UserDetails  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,4 +57,34 @@ public class User {
         ROLE_USER,
         ROLE_ADMIN
     }
+
+    @Override
+public java.util.Collection<? extends org.springframework.security.core.GrantedAuthority> getAuthorities() {
+    return List.of(new org.springframework.security.core.authority.SimpleGrantedAuthority(role.name()));
+}
+
+@Override
+public String getUsername() {
+    return email;
+}
+
+@Override
+public boolean isAccountNonExpired() {
+    return true;
+}
+
+@Override
+public boolean isAccountNonLocked() {
+    return true;
+}
+
+@Override
+public boolean isCredentialsNonExpired() {
+    return true;
+}
+
+@Override
+public boolean isEnabled() {
+    return true;
+}
 }

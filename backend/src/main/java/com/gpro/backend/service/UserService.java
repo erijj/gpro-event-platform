@@ -18,6 +18,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
     public List<UserDto> findAll() {
         return userRepository.findAll().stream()
@@ -41,7 +42,7 @@ public class UserService {
         user.setNom(nom);
         user.setPrenom(prenom);
         user.setEmail(email);
-        user.setPassword(rawPassword); // ⚠️ à hasher avec BCrypt une fois Spring Security branché (étape Auth)
+        user.setPassword(passwordEncoder.encode(rawPassword));
         user.setRole(role);
         user.setCreatedAt(LocalDateTime.now());
 
