@@ -7,6 +7,8 @@
   }
 </header>
 
-<a routerLink="/mes-inscriptions">Mes inscriptions</a>
+@if (authService.isLoggedIn()) {
+  <a routerLink="/mes-inscriptions">Mes inscriptions</a>
+}
 
 <router-outlet />
