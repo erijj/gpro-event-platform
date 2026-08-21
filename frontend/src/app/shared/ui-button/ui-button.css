@@ -19,7 +19,7 @@
   border-radius: var(--radius-md);
   border: none;
   cursor: pointer;
-  transition: background 150ms, box-shadow 150ms, transform 100ms;
+  transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease, border-color 160ms ease, color 160ms ease;
   user-select: none;
   white-space: nowrap;
 }
@@ -28,9 +28,15 @@
   transform: scale(0.98);
 }
 
+.btn:focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 2px;
+}
+
 .btn:disabled {
   opacity: 0.45;
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* --- Primary (ember gradient) --- */
@@ -41,6 +47,15 @@
 
 .btn-primary:hover:not(:disabled) {
   box-shadow: var(--shadow-glow-ember);
+  filter: brightness(1.1);
+}
+
+.btn-primary:active:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.btn-primary:focus-visible {
+  outline-color: var(--flame-orange);
 }
 
 /* --- Danger --- */
@@ -51,6 +66,15 @@
 
 .btn-danger:hover:not(:disabled) {
   background: #d94335;
+  box-shadow: 0 0 16px rgba(194, 59, 46, 0.3);
+}
+
+.btn-danger:active:not(:disabled) {
+  background: #b33225;
+}
+
+.btn-danger:focus-visible {
+  outline-color: var(--danger);
 }
 
 /* --- Ghost --- */
@@ -63,4 +87,13 @@
 .btn-ghost:hover:not(:disabled) {
   border-color: var(--border-hover);
   color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.btn-ghost:active:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.btn-ghost:focus-visible {
+  outline-color: var(--ember);
 }

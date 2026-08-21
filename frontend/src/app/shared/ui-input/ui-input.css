@@ -26,11 +26,15 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   outline: none;
-  transition: border-color 150ms, box-shadow 150ms;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
 }
 
 .ui-input-field::placeholder {
   color: var(--text-muted);
+}
+
+.ui-input-field:hover:not(:focus):not(.ui-input-error) {
+  border-color: var(--border-hover);
 }
 
 .ui-input-field:focus {
@@ -38,9 +42,20 @@
   box-shadow: 0 0 0 3px var(--ember-subtle);
 }
 
+.ui-input-field:focus-visible {
+  border-color: var(--ember);
+  box-shadow: 0 0 0 3px var(--ember-subtle);
+}
+
 .ui-input-field.ui-input-error {
   border-color: var(--danger);
   box-shadow: 0 0 0 3px rgba(194, 59, 46, 0.14);
+}
+
+.ui-input-field:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background-color: var(--bg-secondary);
 }
 
 .ui-input-error-text {

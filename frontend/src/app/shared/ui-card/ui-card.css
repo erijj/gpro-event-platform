@@ -10,10 +10,16 @@
 }
 
 .card-hoverable {
-  transition: transform 200ms ease, box-shadow 200ms ease;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
 }
 
 .card-hoverable:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+  border-color: var(--border-hover);
+}
+
+.card-hoverable:focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 2px;
 }
