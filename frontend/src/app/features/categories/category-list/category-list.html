@@ -1,5 +1,8 @@
 <h2>Liste des catégories</h2>
+@if (authService.isAdmin()) {
 <a routerLink="/categories/create">+ Nouvelle catégorie</a>
+}
+
 
 <p *ngIf="loading()">Chargement...</p>
 

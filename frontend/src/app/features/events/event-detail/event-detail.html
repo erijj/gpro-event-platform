@@ -10,11 +10,13 @@
   <p>Places restantes : {{ event()!.placesRestantes }} / {{ event()!.capaciteMax }}</p>
   <p>Catégorie : {{ event()!.category.libelle }}</p>
   <p>Statut : {{ event()!.statut }}</p>
-
+ 
+  @if (authService.isAdmin()) {
   <a [routerLink]="['/events', event()!.id, 'edit']">Modifier</a>
   <button (click)="onDelete()">Supprimer</button>
+  }
 
-  @if (currentUserService.currentUserId() && event()!.placesRestantes > 0) {
+  @if (authService.currentUserId() && event()!.placesRestantes > 0)  {
   <button (click)="onInscrire()">S'inscrire</button>
 } @else if (event()!.placesRestantes === 0) {
   <p>Plus de places disponibles</p>

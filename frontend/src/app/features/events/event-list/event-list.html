@@ -1,5 +1,7 @@
 <h2>Liste des événements</h2>
-<a routerLink="/events/create">+ Nouvel événement</a>
+@if (authService.isAdmin()) {
+  <a routerLink="/events/create">+ Nouvel événement</a>
+}
 
 <p *ngIf="loading()">Chargement...</p>
 

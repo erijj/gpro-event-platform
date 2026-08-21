@@ -1,9 +1,6 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
-import { CurrentUserService } from './core/services/current-user.service';
-import { UserService } from './core/services/user.service';
-import { User } from './core/models/user.model';
-
+import { Component, inject } from '@angular/core';
+import { RouterOutlet, RouterLink, Router } from '@angular/router';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +8,12 @@ import { User } from './core/models/user.model';
   imports: [RouterOutlet, RouterLink],
   templateUrl: './app.html'
 })
-export class App implements OnInit {
-  currentUserService = inject(CurrentUserService);
-  private userService = inject(UserService);
+export class App {
+  authService = inject(AuthService);
+  private router = inject(Router);
 
-  users = signal<User[]>([]);
-
-  ngOnInit() {
-    this.userService.getAll().subscribe((data) => this.users.set(data));
-  }
-
-  onUserChange(event: Event) {
-    const id = Number((event.target as HTMLSelectElement).value);
-    this.currentUserService.setUser(id);
+  onLogout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

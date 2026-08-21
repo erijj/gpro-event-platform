@@ -5,15 +5,16 @@
   */
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient,withInterceptors } from '@angular/common/http';
+import { routes } from './app.routes' 
+import { authInterceptor } from './core/interceptors/auth-interceptor';
 
-import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),// Enable zoneless change detection for improved performance
     provideRouter(routes),// Set up the router with the defined routes
-    provideHttpClient()// Set up the HTTP client for making API requests
+    provideHttpClient(withInterceptors([authInterceptor])) // Set up the HTTP client for making API requests
   ]
 };

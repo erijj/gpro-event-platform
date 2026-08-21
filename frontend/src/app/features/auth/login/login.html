@@ -1,0 +1,46 @@
+<h2>Connexion</h2>
+
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+
+  <div>
+    <label for="email">Email</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+    />
+
+    @if (loginForm.controls.email.touched &&
+         loginForm.controls.email.hasError('required')) {
+      <p>L'email est obligatoire.</p>
+    }
+
+    @if (loginForm.controls.email.touched &&
+         loginForm.controls.email.hasError('email')) {
+      <p>L'email n'est pas valide.</p>
+    }
+  </div>
+
+  <div>
+    <label for="password">Mot de passe</label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+    />
+
+    @if (loginForm.controls.password.touched &&
+         loginForm.controls.password.hasError('required')) {
+      <p>Le mot de passe est obligatoire.</p>
+    }
+  </div>
+
+  @if (errorMessage()) {
+    <p>{{ errorMessage() }}</p>
+  }
+
+  <button type="submit" [disabled]="loading()">
+    {{ loading() ? 'Connexion...' : 'Se connecter' }}
+  </button>
+
+</form>

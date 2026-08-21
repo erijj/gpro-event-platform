@@ -13,30 +13,36 @@ import { RegistrationList } from './features/registrations/registration-list/reg
 import { UserEdit } from './features/users/user-edit/user-edit';
 import { UserCreate } from './features/users/user-create/user-create';
 import { MesInscriptions } from './features/registrations/mes-inscriptions/mes-inscriptions';
+import { Login } from './features/auth/login/login';
+import { authGuard } from './core/guards/auth-guard';
+import { adminGuard } from './core/guards/admin-guard';
 
 export const routes: Routes = [
+  // --- Auth ---
+  { path: 'login', component: Login },
+
   // --- Catégories ---
-  { path: 'categories/create', component: CategoryCreate },
-  { path: 'categories/:id/edit', component: CategoryEdit },
+  { path: 'categories/create', component: CategoryCreate, canActivate: [adminGuard] },
+  { path: 'categories/:id/edit', component: CategoryEdit, canActivate: [adminGuard] },
   { path: 'categories/:id', component: CategoryDetail },
   { path: 'categories', component: CategoryList },
 
   // --- Événements ---
-  { path: 'events/create', component: EventCreate },
-  { path: 'events/:id/edit', component: EventEdit },
+  { path: 'events/create', component: EventCreate, canActivate: [adminGuard] },
+  { path: 'events/:id/edit', component: EventEdit, canActivate: [adminGuard] },
   { path: 'events/:id', component: EventDetail },
   { path: 'events', component: EventList },
 
-  // --- Utilisateurs ---
-  { path: 'users/create', component: UserCreate },
-  { path: 'users/:id/edit', component: UserEdit },
-  { path: 'users/:id', component: UserDetail },
-  { path: 'users', component: UserList },
+  // --- Utilisateurs (réservé ADMIN) ---
+  { path: 'users/create', component: UserCreate, canActivate: [adminGuard] },
+  { path: 'users/:id/edit', component: UserEdit, canActivate: [adminGuard] },
+  { path: 'users/:id', component: UserDetail, canActivate: [adminGuard] },
+  { path: 'users', component: UserList, canActivate: [adminGuard] },
 
-  // --- Inscriptions ---
-  { path: 'registrations', component: RegistrationList },
-  { path: 'mes-inscriptions', component: MesInscriptions },
+  // --- Inscriptions (réservé connecté) ---
+  { path: 'registrations', component: RegistrationList, canActivate: [adminGuard] },
+  { path: 'mes-inscriptions', component: MesInscriptions, canActivate: [authGuard] },
 
   // --- Redirection par défaut ---
-  { path: '', redirectTo: 'users', pathMatch: 'full' }
+  { path: '', redirectTo: 'events', pathMatch: 'full' }
 ];

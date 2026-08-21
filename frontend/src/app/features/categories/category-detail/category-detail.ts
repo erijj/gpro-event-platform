@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../../../core/services/category.service';
 import { Category } from '../../../core/models/category.model';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 
 
 @Component({
@@ -19,6 +20,8 @@ export class CategoryDetail implements OnInit {
   loading = signal(true);
   errorMessage = signal<string | null>(null);
   categoryId = Number(this.route.snapshot.paramMap.get('id'));
+  authService = inject(AuthService);
+
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));

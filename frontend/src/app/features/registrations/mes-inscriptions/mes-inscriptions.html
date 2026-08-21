@@ -1,7 +1,7 @@
 <h2>Mes inscriptions</h2>
 
-@if (!currentUserService.currentUserId()) {
-  <p>Sélectionnez un utilisateur pour voir ses inscriptions.</p>
+@if (!authService.currentUserId()) {
+  <p>Connectez-vous pour voir vos inscriptions.</p>
 } @else if (loading()) {
   <p>Chargement...</p>
 } @else if (errorMessage()) {

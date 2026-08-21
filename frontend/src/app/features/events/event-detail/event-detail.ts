@@ -2,7 +2,7 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EventService } from '../../../core/services/event.service';
 import { RegistrationService } from '../../../core/services/registration.service';
-import { CurrentUserService } from '../../../core/services/current-user.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { Event } from '../../../core/models/event.model';
 
 @Component({
@@ -15,7 +15,7 @@ export class EventDetail implements OnInit {
   private route = inject(ActivatedRoute);
   private eventService = inject(EventService);
   private registrationService = inject(RegistrationService);
-  currentUserService = inject(CurrentUserService);
+  authService = inject(AuthService);
   private router = inject(Router);
 
   eventId = Number(this.route.snapshot.paramMap.get('id'));
@@ -46,9 +46,9 @@ export class EventDetail implements OnInit {
   }
 
   onInscrire(): void {
-    const userId = this.currentUserService.currentUserId();
+    const userId = this.authService.currentUserId();
     if (!userId) {
-      this.inscriptionMessage.set('Sélectionnez un utilisateur d\'abord');
+      this.inscriptionMessage.set('Connectez-vous d\'abord');
       return;
     }
     this.inscriptionMessage.set(null);

@@ -1,6 +1,6 @@
 import { Component, inject, signal, OnInit, effect } from '@angular/core';
 import { RegistrationService } from '../../../core/services/registration.service';
-import { CurrentUserService } from '../../../core/services/current-user.service';
+import { AuthService } from '../../../core/services/auth.service';
 import { Registration } from '../../../core/models/registration.model';
 
 @Component({
@@ -11,7 +11,7 @@ import { Registration } from '../../../core/models/registration.model';
 })
 export class MesInscriptions implements OnInit {
   private registrationService = inject(RegistrationService);
-  currentUserService = inject(CurrentUserService);
+  authService = inject(AuthService);
 
   inscriptions = signal<Registration[]>([]);
   loading = signal(true);
@@ -19,7 +19,7 @@ export class MesInscriptions implements OnInit {
 
   constructor() {
     effect(() => {
-      const userId = this.currentUserService.currentUserId();
+      const userId = this.authService.currentUserId();
       if (userId) {
         this.loadInscriptions(userId);
       } else {
@@ -44,15 +44,16 @@ export class MesInscriptions implements OnInit {
       }
     });
   }
-  onAnnuler(id: number): void {
-  if (!confirm('Annuler cette inscription ?')) return;
 
-  this.registrationService.annuler(id).subscribe({
-    next: () => {
-      const userId = this.currentUserService.currentUserId();
-      if (userId) this.loadInscriptions(userId);
-    },
-    error: () => this.errorMessage.set('Erreur lors de l\'annulation')
-  });
-}
+  onAnnuler(id: number): void {
+    if (!confirm('Annuler cette inscription ?')) return;
+
+    this.registrationService.annuler(id).subscribe({
+      next: () => {
+        const userId = this.authService.currentUserId();
+        if (userId) this.loadInscriptions(userId);
+      },
+      error: () => this.errorMessage.set('Erreur lors de l\'annulation')
+    });
+  }
 }

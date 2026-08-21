@@ -5,6 +5,8 @@
 } @else if (category()) {
   <h2>{{ category()!.libelle }}</h2>
 
-  <a [routerLink]="['/categories', category()!.id, 'edit']">Modifier</a>
-  <button (click)="onDelete()">Supprimer</button>
+  @if (authService.isAdmin()) {
+    <a [routerLink]="['/categories', category()!.id, 'edit']">Modifier</a>
+    <button (click)="onDelete()">Supprimer</button>
+  }
 }

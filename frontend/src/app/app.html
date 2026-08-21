@@ -1,15 +1,12 @@
-<router-outlet></router-outlet>
 <header>
-  <label>Utilisateur actif :</label>
-  <select (change)="onUserChange($event)">
-    <option [selected]="!currentUserService.currentUserId()">-- Choisir --</option>
-    @for (u of users(); track u.id) {
-      <option [value]="u.id" [selected]="u.id === currentUserService.currentUserId()">
-        {{ u.prenom }} {{ u.nom }}
-      </option>
-    }
-  </select>
+  @if (authService.isLoggedIn()) {
+    <span>Connecté : {{ authService.currentUser()?.prenom }} {{ authService.currentUser()?.nom }} ({{ authService.currentUserRole() }})</span>
+    <button (click)="onLogout()">Déconnexion</button>
+  } @else {
+    <a routerLink="/login">Se connecter</a>
+  }
 </header>
+
 <a routerLink="/mes-inscriptions">Mes inscriptions</a>
 
 <router-outlet />

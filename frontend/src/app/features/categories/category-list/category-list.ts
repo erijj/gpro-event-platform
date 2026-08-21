@@ -1,8 +1,9 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Category } from '../../../core/models/category.model';
 import { CategoryService } from '../../../core/services/category.service';
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-category-list',
@@ -14,6 +15,8 @@ export class CategoryList implements OnInit {
   categories = signal<Category[]>([]);
   loading = signal(true);
   errorMessage = signal('');
+  authService = inject(AuthService);
+
 
   constructor(private categoryService: CategoryService) {}
 
