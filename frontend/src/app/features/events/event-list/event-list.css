@@ -1,25 +1,35 @@
 /* ============================================
-   Event List Page
+   Event List Page — Dashboard with Hero Band
    ============================================ */
 
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
+/* --- Hero band --- */
+.hero-band {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-8);
+  background-color: var(--bg-void);
 }
 
-.page-header {
+.hero-content {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 100%;
+  padding: 0 var(--space-8);
 }
 
-.page-title {
-  font-size: var(--text-2xl);
+.hero-title {
+  font-size: var(--text-3xl);
   font-weight: 700;
   color: var(--text-primary);
+  margin: 0;
 }
 
+/* --- States --- */
 .state-loading {
   text-align: center;
   padding: var(--space-12) 0;
@@ -36,54 +46,24 @@
   font-size: var(--text-sm);
 }
 
-.table-wrapper {
-  overflow-x: auto;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background-color: var(--bg-card);
+/* --- Card grid --- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-6);
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: var(--text-sm);
-}
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .hero-band {
+    height: 180px;
+  }
 
-thead {
-  background-color: var(--bg-secondary);
-}
+  .hero-content {
+    padding: 0 var(--space-4);
+  }
 
-th {
-  padding: var(--space-3) var(--space-4);
-  text-align: left;
-  font-weight: 600;
-  font-size: var(--text-xs);
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-bottom: 1px solid var(--border);
-}
-
-td {
-  padding: var(--space-3) var(--space-4);
-  color: var(--text-primary);
-  border-bottom: 1px solid var(--border);
-}
-
-tr:last-child td {
-  border-bottom: none;
-}
-
-tbody tr:hover {
-  background-color: var(--bg-secondary);
-}
-
-.table-link {
-  color: var(--ember);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.table-link:hover {
-  color: var(--ember-hover);
+  .hero-title {
+    font-size: var(--text-2xl);
+  }
 }

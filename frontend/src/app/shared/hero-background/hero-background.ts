@@ -11,10 +11,10 @@ interface Particle {
 }
 
 @Directive({
-  selector: '[appParticles]',
+  selector: '[appHeroBackground]',
   standalone: true,
 })
-export class ParticlesDirective implements OnDestroy {
+export class HeroBackgroundDirective implements OnDestroy {
   private canvas: HTMLCanvasElement | null = null;
   private ctx: CanvasRenderingContext2D | null = null;
   private animationId = 0;
@@ -22,10 +22,10 @@ export class ParticlesDirective implements OnDestroy {
   private resizeObserver: ResizeObserver | null = null;
 
   private readonly COLORS = [
-    'rgba(179, 64, 31,',   // ember
-    'rgba(255, 196, 107,', // amber
-    'rgba(255, 122, 42,',  // flame-orange
-    'rgba(255, 206, 90,',  // flame-gold
+    'rgba(179, 64, 31,',
+    'rgba(255, 196, 107,',
+    'rgba(255, 122, 42,',
+    'rgba(255, 206, 90,',
   ];
 
   private readonly PARTICLE_COUNT = 120;
@@ -58,10 +58,8 @@ export class ParticlesDirective implements OnDestroy {
     if (!this.canvas || !this.ctx) return;
     const parent = this.canvas.parentElement;
     if (!parent) return;
-    const w = parent.clientWidth;
-    const h = parent.clientHeight;
-    this.canvas.width = w;
-    this.canvas.height = h;
+    this.canvas.width = parent.clientWidth;
+    this.canvas.height = parent.clientHeight;
   }
 
   private spawnParticles(): void {
@@ -92,7 +90,6 @@ export class ParticlesDirective implements OnDestroy {
       p.x += p.vx;
       p.y += p.vy;
 
-      // wrap around
       if (p.y < -10) {
         p.y = this.canvas.height + 10;
         p.x = Math.random() * this.canvas.width;

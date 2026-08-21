@@ -1,6 +1,6 @@
 <div class="page">
   <div class="page-header">
-    <h2 class="page-title">Liste des catégories</h2>
+    <h2 class="page-title">Catégories</h2>
     @if (authService.isAdmin()) {
       <a routerLink="/categories/create">
         <ui-button variant="primary">+ Nouvelle catégorie</ui-button>
@@ -17,21 +17,12 @@
   }
 
   @if (!loading() && !errorMessage()) {
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>Libellé</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (category of categories(); track category.id) {
-            <tr>
-              <td><a [routerLink]="['/categories', category.id]" class="table-link">{{ category.libelle }}</a></td>
-            </tr>
-          }
-        </tbody>
-      </table>
+    <div class="chip-cloud">
+      @for (category of categories(); track category.id) {
+        <a [routerLink]="['/categories', category.id]" class="category-chip">
+          {{ category.libelle }}
+        </a>
+      }
     </div>
   }
 </div>

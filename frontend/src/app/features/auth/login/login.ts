@@ -3,11 +3,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { UiCard } from '../../../shared/ui-card/ui-card';
 import { UiButton } from '../../../shared/ui-button/ui-button';
-import { ParticlesDirective } from './particles.directive';
+import { HeroBackgroundDirective } from '../../../shared/hero-background/hero-background';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, UiCard, UiButton, ParticlesDirective],
+  imports: [ReactiveFormsModule, UiCard, UiButton, HeroBackgroundDirective],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

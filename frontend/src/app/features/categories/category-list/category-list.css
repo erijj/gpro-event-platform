@@ -1,5 +1,5 @@
 /* ============================================
-   Category List Page
+   Category List Page — Chip/Tag Cloud
    ============================================ */
 
 .page {
@@ -36,54 +36,30 @@
   font-size: var(--text-sm);
 }
 
-.table-wrapper {
-  overflow-x: auto;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  background-color: var(--bg-card);
+/* --- Chip cloud --- */
+.chip-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.category-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-4);
   font-size: var(--text-sm);
-}
-
-thead {
-  background-color: var(--bg-secondary);
-}
-
-th {
-  padding: var(--space-3) var(--space-4);
-  text-align: left;
-  font-weight: 600;
-  font-size: var(--text-xs);
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border-bottom: 1px solid var(--border);
-}
-
-td {
-  padding: var(--space-3) var(--space-4);
-  color: var(--text-primary);
-  border-bottom: 1px solid var(--border);
-}
-
-tr:last-child td {
-  border-bottom: none;
-}
-
-tbody tr:hover {
-  background-color: var(--bg-secondary);
-}
-
-.table-link {
-  color: var(--ember);
-  text-decoration: none;
   font-weight: 500;
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  transition: border-color 150ms, background-color 150ms, transform 150ms;
 }
 
-.table-link:hover {
-  color: var(--ember-hover);
+.category-chip:hover {
+  border-color: var(--ember);
+  background-color: var(--ember-subtle);
+  color: var(--text-primary);
+  transform: translateY(-1px);
 }

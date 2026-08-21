@@ -5,11 +5,12 @@ import { EventService } from '../../../core/services/event.service';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { UiButton } from '../../../shared/ui-button/ui-button';
-import { UiBadge } from '../../../shared/ui-badge/ui-badge';
+import { EventCard } from '../../../shared/event-card/event-card';
+import { HeroBackgroundDirective } from '../../../shared/hero-background/hero-background';
 
 @Component({
   selector: 'app-event-list',
-  imports: [CommonModule, RouterLink, UiButton, UiBadge],
+  imports: [CommonModule, RouterLink, UiButton, EventCard, HeroBackgroundDirective],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css'
 })
