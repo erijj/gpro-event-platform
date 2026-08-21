@@ -71,3 +71,12 @@ tr:last-child td {
 tbody tr:hover {
   background-color: var(--bg-secondary);
 }
+
+/* --- Responsive: Mobile --- */
+@media (max-width: 767px) {
+  .table-wrapper {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+}

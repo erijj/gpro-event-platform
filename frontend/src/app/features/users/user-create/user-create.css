@@ -81,3 +81,10 @@
 .form-actions {
   padding-top: var(--space-2);
 }
+
+/* --- Responsive: Mobile --- */
+@media (max-width: 767px) {
+  .page {
+    max-width: 100%;
+  }
+}

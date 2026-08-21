@@ -39,15 +39,15 @@
   --gradient-ember: linear-gradient(135deg, #b3401f, #ff7a2a);
   --gradient-amber: linear-gradient(135deg, #ff7a2a, #ffce5a);
 
-  /* Typography scale */
+  /* Typography scale — fluid on mobile */
   --font-family: 'Inter', system-ui, -apple-system, sans-serif;
   --text-xs:  12px;
   --text-sm:  14px;
   --text-base: 16px;
-  --text-lg:  20px;
-  --text-xl:  24px;
-  --text-2xl: 32px;
-  --text-3xl: 40px;
+  --text-lg:  clamp(18px, 1.25vw + 12px, 20px);
+  --text-xl:  clamp(20px, 1.5vw + 12px, 24px);
+  --text-2xl: clamp(24px, 2vw + 12px, 32px);
+  --text-3xl: clamp(28px, 2.5vw + 12px, 40px);
 
   /* Spacing — 8px base unit */
   --space-1:  4px;

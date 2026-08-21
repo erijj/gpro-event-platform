@@ -80,3 +80,11 @@ ui-card {
   border-radius: var(--radius-sm);
   padding: var(--space-3);
 }
+
+/* --- Responsive: Mobile --- */
+@media (max-width: 767px) {
+  .login-page {
+    min-height: calc(100vh - 80px);
+    padding: var(--space-4);
+  }
+}

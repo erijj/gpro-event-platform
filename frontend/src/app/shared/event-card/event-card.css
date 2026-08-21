@@ -89,3 +89,10 @@
   font-size: var(--text-xs);
   color: var(--text-muted);
 }
+
+/* --- Responsive: Mobile --- */
+@media (max-width: 767px) {
+  .event-card-photo {
+    height: 140px;
+  }
+}

@@ -53,8 +53,23 @@
   gap: var(--space-6);
 }
 
-/* --- Responsive --- */
-@media (max-width: 768px) {
+/* --- Responsive: Tablet --- */
+@media (max-width: 1199px) {
+  .hero-band {
+    height: 220px;
+  }
+
+  .hero-content {
+    padding: 0 var(--space-6);
+  }
+
+  .card-grid {
+    gap: var(--space-4);
+  }
+}
+
+/* --- Responsive: Mobile --- */
+@media (max-width: 767px) {
   .hero-band {
     height: 180px;
   }
@@ -65,5 +80,10 @@
 
   .hero-title {
     font-size: var(--text-2xl);
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
   }
 }
