@@ -3,10 +3,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { UiCard } from '../../../shared/ui-card/ui-card';
 import { UiButton } from '../../../shared/ui-button/ui-button';
+import { ParticlesDirective } from './particles.directive';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, UiCard, UiButton],
+  imports: [ReactiveFormsModule, UiCard, UiButton, ParticlesDirective],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

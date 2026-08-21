@@ -3,10 +3,13 @@
    ============================================ */
 
 .login-page {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 120px);
+  overflow: hidden;
+  background-color: var(--bg-void);
 }
 
 .login-title {
@@ -15,6 +18,11 @@
   color: var(--text-primary);
   margin-bottom: var(--space-6);
   text-align: center;
+}
+
+ui-card {
+  position: relative;
+  z-index: 1;
 }
 
 .login-form {
