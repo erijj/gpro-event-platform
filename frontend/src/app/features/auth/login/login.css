@@ -10,6 +10,7 @@
   min-height: calc(100vh - 120px);
   overflow: hidden;
   background-color: var(--bg-void);
+  animation: fadeInUp 350ms ease both;
 }
 
 .login-title {

@@ -51,6 +51,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--space-6);
+  animation: fadeInUp 350ms ease both;
+  animation-delay: 100ms;
 }
 
 /* --- Responsive: Tablet --- */
