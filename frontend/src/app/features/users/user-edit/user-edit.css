@@ -39,7 +39,7 @@
 .form-input,
 .form-select {
   width: 100%;
-  padding: 10px 14px;
+  padding: 12px 14px;
   font-size: var(--text-sm);
   font-family: var(--font-family);
   color: var(--text-primary);

@@ -26,6 +26,9 @@ header {
 }
 
 .header-logo {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 0;
   font-size: var(--text-lg);
   font-weight: 700;
   color: var(--ember);
@@ -45,11 +48,14 @@ header {
 }
 
 .nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 4px;
   font-size: var(--text-sm);
   font-weight: 500;
   color: var(--text-secondary);
   text-decoration: none;
-  transition: color 150ms;
+  transition: color 160ms ease;
 }
 
 .nav-link:hover {
@@ -87,8 +93,8 @@ header button {
   background: none;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: var(--space-1) var(--space-3);
-  transition: color 150ms, border-color 150ms;
+  padding: 10px 12px;
+  transition: color 160ms ease, border-color 160ms ease;
 }
 
 header button:hover {
