@@ -2,10 +2,11 @@ import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Registration } from '../../../core/models/registration.model';
 import { RegistrationService } from '../../../core/services/registration.service';
+import { UiBadge } from '../../../shared/ui-badge/ui-badge';
 
 @Component({
   selector: 'app-registration-list',
-  imports: [CommonModule],
+  imports: [CommonModule, UiBadge],
   templateUrl: './registration-list.html',
   styleUrl: './registration-list.css'
 })

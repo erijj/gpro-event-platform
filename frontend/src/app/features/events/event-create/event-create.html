@@ -1,44 +1,54 @@
-<h2>Créer un événement</h2>
-
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <label>
-    Titre :
-    <input type="text" formControlName="titre">
-  </label>
-
-  <label>
-    Description :
-    <textarea formControlName="description"></textarea>
-  </label>
-
-  <label>
-    Date et heure :
-    <input type="datetime-local" formControlName="dateHeure">
-  </label>
-
-  <label>
-    Lieu :
-    <input type="text" formControlName="lieu">
-  </label>
-
-  <label>
-    Capacité max :
-    <input type="number" formControlName="capaciteMax">
-  </label>
-
-  <label>
-    Catégorie :
-    <select formControlName="categoryId">
-      <option [value]="null">-- Choisir --</option>
-      @for (cat of categories(); track cat.id) {
-        <option [value]="cat.id">{{ cat.libelle }}</option>
-      }
-    </select>
-  </label>
-
-  <button type="submit" [disabled]="form.invalid">Créer</button>
-</form>
-
 @if (errorMessage()) {
-  <p class="error">{{ errorMessage() }}</p>
+  <p class="state-error">{{ errorMessage() }}</p>
 }
+
+<div class="page">
+  <h2 class="page-title">Créer un événement</h2>
+
+  <ui-card>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Titre</label>
+        <input type="text" formControlName="titre" class="form-input" placeholder="Titre de l'événement">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <textarea formControlName="description" class="form-textarea" rows="4" placeholder="Description..."></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Date et heure</label>
+          <input type="datetime-local" formControlName="dateHeure" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Lieu</label>
+          <input type="text" formControlName="lieu" class="form-input" placeholder="Lieu de l'événement">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Capacité max</label>
+          <input type="number" formControlName="capaciteMax" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Catégorie</label>
+          <select formControlName="categoryId" class="form-select">
+            <option [value]="null">-- Choisir --</option>
+            @for (cat of categories(); track cat.id) {
+              <option [value]="cat.id">{{ cat.libelle }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <ui-button type="submit" [disabled]="form.invalid">Créer</ui-button>
+      </div>
+    </form>
+  </ui-card>
+</div>

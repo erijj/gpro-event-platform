@@ -4,10 +4,13 @@ import { EventService } from '../../../core/services/event.service';
 import { RegistrationService } from '../../../core/services/registration.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Event } from '../../../core/models/event.model';
+import { UiCard } from '../../../shared/ui-card/ui-card';
+import { UiButton } from '../../../shared/ui-button/ui-button';
+import { UiBadge } from '../../../shared/ui-badge/ui-badge';
 
 @Component({
   selector: 'app-event-detail',
-  imports: [RouterLink],
+  imports: [RouterLink, UiCard, UiButton, UiBadge],
   templateUrl: './event-detail.html',
   styleUrl: './event-detail.css'
 })

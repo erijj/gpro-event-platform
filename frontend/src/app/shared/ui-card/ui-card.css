@@ -1,0 +1,19 @@
+/* ============================================
+   UI Card — Shared Component
+   ============================================ */
+
+.card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+}
+
+.card-hoverable {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.card-hoverable:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}

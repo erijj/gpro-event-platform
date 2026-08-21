@@ -1,31 +1,51 @@
-<h2>Liste des événements</h2>
-@if (authService.isAdmin()) {
-  <a routerLink="/events/create">+ Nouvel événement</a>
-}
+<div class="page">
+  <div class="page-header">
+    <h2 class="page-title">Liste des événements</h2>
+    @if (authService.isAdmin()) {
+      <a routerLink="/events/create">
+        <ui-button variant="primary">+ Nouvel événement</ui-button>
+      </a>
+    }
+  </div>
 
-<p *ngIf="loading()">Chargement...</p>
+  @if (loading()) {
+    <p class="state-loading">Chargement...</p>
+  }
 
-<p *ngIf="errorMessage()" class="error">{{ errorMessage() }}</p>
+  @if (errorMessage()) {
+    <p class="state-error">{{ errorMessage() }}</p>
+  }
 
-<table *ngIf="!loading() && !errorMessage()">
-  <thead>
-    <tr>
-      <th>Titre</th>
-      <th>Date</th>
-      <th>Lieu</th>
-      <th>Catégorie</th>
-      <th>Places restantes</th>
-      <th>Statut</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let event of events()">
-      <td><a [routerLink]="['/events', event.id]">{{ event.titre }}</a></td>
-      <td>{{ event.dateHeure }}</td>
-      <td>{{ event.lieu }}</td>
-      <td>{{ event.category.libelle }}</td>
-      <td>{{ event.placesRestantes }} / {{ event.capaciteMax }}</td>
-      <td>{{ event.statut }}</td>
-    </tr>
-  </tbody>
-</table>
+  @if (!loading() && !errorMessage()) {
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th>Date</th>
+            <th>Lieu</th>
+            <th>Catégorie</th>
+            <th>Places</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (event of events(); track event.id) {
+            <tr>
+              <td><a [routerLink]="['/events', event.id]" class="table-link">{{ event.titre }}</a></td>
+              <td>{{ event.dateHeure }}</td>
+              <td>{{ event.lieu }}</td>
+              <td>{{ event.category.libelle }}</td>
+              <td>{{ event.placesRestantes }} / {{ event.capaciteMax }}</td>
+              <td>
+                <ui-badge [variant]="event.statut === 'PLANIFIE' ? 'info' : event.statut === 'EN_COURS' ? 'warning' : event.statut === 'TERMINE' ? 'success' : 'danger'">
+                  {{ event.statut }}
+                </ui-badge>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

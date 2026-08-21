@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { User } from '../../../core/models/user.model';
 import { UserService } from '../../../core/services/user.service';
 import { RouterLink } from '@angular/router';
+import { UiButton } from '../../../shared/ui-button/ui-button';
+import { UiBadge } from '../../../shared/ui-badge/ui-badge';
 
 @Component({
   selector: 'app-user-list',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, UiButton, UiBadge],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css'
 })

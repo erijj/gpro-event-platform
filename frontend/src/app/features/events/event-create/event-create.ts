@@ -4,10 +4,12 @@ import { Router } from '@angular/router';
 import { EventService } from '../../../core/services/event.service';
 import { CategoryService } from '../../../core/services/category.service';
 import { Category } from '../../../core/models/category.model';
+import { UiCard } from '../../../shared/ui-card/ui-card';
+import { UiButton } from '../../../shared/ui-button/ui-button';
 
 @Component({
   selector: 'app-event-create',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, UiCard, UiButton],
   templateUrl: './event-create.html',
   styleUrl: './event-create.css'
 })

@@ -1,46 +1,52 @@
-<h2>Connexion</h2>
+<div class="login-page">
+  <ui-card>
+    <h2 class="login-title">Connexion</h2>
 
-<form [formGroup]="loginForm" (ngSubmit)="login()">
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="login-form">
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          class="form-input"
+          placeholder="vous@exemple.com"
+        />
 
-  <div>
-    <label for="email">Email</label>
-    <input
-      id="email"
-      type="email"
-      formControlName="email"
-    />
+        @if (loginForm.controls.email.touched &&
+             loginForm.controls.email.hasError('required')) {
+          <p class="form-error">L'email est obligatoire.</p>
+        }
 
-    @if (loginForm.controls.email.touched &&
-         loginForm.controls.email.hasError('required')) {
-      <p>L'email est obligatoire.</p>
-    }
+        @if (loginForm.controls.email.touched &&
+             loginForm.controls.email.hasError('email')) {
+          <p class="form-error">L'email n'est pas valide.</p>
+        }
+      </div>
 
-    @if (loginForm.controls.email.touched &&
-         loginForm.controls.email.hasError('email')) {
-      <p>L'email n'est pas valide.</p>
-    }
-  </div>
+      <div class="form-group">
+        <label for="password" class="form-label">Mot de passe</label>
+        <input
+          id="password"
+          type="password"
+          formControlName="password"
+          class="form-input"
+          placeholder="••••••••"
+        />
 
-  <div>
-    <label for="password">Mot de passe</label>
-    <input
-      id="password"
-      type="password"
-      formControlName="password"
-    />
+        @if (loginForm.controls.password.touched &&
+             loginForm.controls.password.hasError('required')) {
+          <p class="form-error">Le mot de passe est obligatoire.</p>
+        }
+      </div>
 
-    @if (loginForm.controls.password.touched &&
-         loginForm.controls.password.hasError('required')) {
-      <p>Le mot de passe est obligatoire.</p>
-    }
-  </div>
+      @if (errorMessage()) {
+        <p class="form-error-box">{{ errorMessage() }}</p>
+      }
 
-  @if (errorMessage()) {
-    <p>{{ errorMessage() }}</p>
-  }
-
-  <button type="submit" [disabled]="loading()">
-    {{ loading() ? 'Connexion...' : 'Se connecter' }}
-  </button>
-
-</form>
+      <ui-button type="submit" [disabled]="loading()">
+        {{ loading() ? 'Connexion...' : 'Se connecter' }}
+      </ui-button>
+    </form>
+  </ui-card>
+</div>

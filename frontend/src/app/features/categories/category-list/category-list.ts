@@ -4,10 +4,11 @@ import { Category } from '../../../core/models/category.model';
 import { CategoryService } from '../../../core/services/category.service';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { UiButton } from '../../../shared/ui-button/ui-button';
 
 @Component({
   selector: 'app-category-list',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, UiButton],
   templateUrl: './category-list.html',
   styleUrl: './category-list.css'
 })

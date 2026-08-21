@@ -1,24 +1,40 @@
-<h2>Liste des inscriptions</h2>
+<div class="page">
+  <h2 class="page-title">Liste des inscriptions</h2>
 
-<p *ngIf="loading()">Chargement...</p>
+  @if (loading()) {
+    <p class="state-loading">Chargement...</p>
+  }
 
-<p *ngIf="errorMessage()" class="error">{{ errorMessage() }}</p>
+  @if (errorMessage()) {
+    <p class="state-error">{{ errorMessage() }}</p>
+  }
 
-<table *ngIf="!loading() && !errorMessage()">
-  <thead>
-    <tr>
-      <th>Utilisateur</th>
-      <th>Événement</th>
-      <th>Date d'inscription</th>
-      <th>Statut</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let registration of registrations()">
-      <td>{{ registration.userNomComplet }}</td>
-      <td>{{ registration.eventTitre }}</td>
-      <td>{{ registration.dateInscription }}</td>
-      <td>{{ registration.statut }}</td>
-    </tr>
-  </tbody>
-</table>
+  @if (!loading() && !errorMessage()) {
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Utilisateur</th>
+            <th>Événement</th>
+            <th>Date d'inscription</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (registration of registrations(); track registration.id) {
+            <tr>
+              <td>{{ registration.userNomComplet }}</td>
+              <td>{{ registration.eventTitre }}</td>
+              <td>{{ registration.dateInscription }}</td>
+              <td>
+                <ui-badge [variant]="registration.statut === 'CONFIRMEE' ? 'success' : 'danger'">
+                  {{ registration.statut }}
+                </ui-badge>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

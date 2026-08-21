@@ -1,14 +1,30 @@
 <header>
-  @if (authService.isLoggedIn()) {
-    <span>Connecté : {{ authService.currentUser()?.prenom }} {{ authService.currentUser()?.nom }} ({{ authService.currentUserRole() }})</span>
-    <button (click)="onLogout()">Déconnexion</button>
-  } @else {
-    <a routerLink="/login">Se connecter</a>
-  }
+  <div class="header-brand">
+    <a routerLink="/events" class="header-logo">GPRO</a>
+  </div>
+
+  <nav class="header-nav">
+    @if (authService.isLoggedIn()) {
+      <a routerLink="/mes-inscriptions" class="nav-link">Mes inscriptions</a>
+    }
+    @if (authService.isAdmin()) {
+      <a routerLink="/categories" class="nav-link">Catégories</a>
+      <a routerLink="/users" class="nav-link">Utilisateurs</a>
+      <a routerLink="/registrations" class="nav-link">Inscriptions</a>
+    }
+  </nav>
+
+  <div class="header-actions">
+    @if (authService.isLoggedIn()) {
+      <span class="header-user">{{ authService.currentUser()?.prenom }} {{ authService.currentUser()?.nom }}</span>
+      <span class="header-role">{{ authService.currentUserRole() }}</span>
+      <button (click)="onLogout()">Déconnexion</button>
+    } @else {
+      <a routerLink="/login" class="nav-link">Se connecter</a>
+    }
+  </div>
 </header>
 
-@if (authService.isLoggedIn()) {
-  <a routerLink="/mes-inscriptions">Mes inscriptions</a>
-}
-
-<router-outlet />
+<main>
+  <router-outlet />
+</main>

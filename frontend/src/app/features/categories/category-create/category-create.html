@@ -1,14 +1,20 @@
-<h2>Créer une catégorie</h2>
-
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <label>
-    Libellé :
-    <input type="text" formControlName="libelle">
-  </label>
-
-  <button type="submit" [disabled]="form.invalid">Créer</button>
-</form>
-
 @if (errorMessage()) {
-  <p class="error">{{ errorMessage() }}</p>
+  <p class="state-error">{{ errorMessage() }}</p>
 }
+
+<div class="page">
+  <h2 class="page-title">Créer une catégorie</h2>
+
+  <ui-card>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-grid">
+      <div class="form-group">
+        <label class="form-label">Libellé</label>
+        <input type="text" formControlName="libelle" class="form-input" placeholder="Nom de la catégorie">
+      </div>
+
+      <div class="form-actions">
+        <ui-button type="submit" [disabled]="form.invalid">Créer</ui-button>
+      </div>
+    </form>
+  </ui-card>
+</div>
