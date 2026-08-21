@@ -1,5 +1,6 @@
 import { Component, signal, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { UiCard } from '../../../shared/ui-card/ui-card';
 import { UiButton } from '../../../shared/ui-button/ui-button';
@@ -14,6 +15,7 @@ import { HeroBackgroundDirective } from '../../../shared/hero-background/hero-ba
 export class Login {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
+  private router = inject(Router);
 
   loading = signal(false);
   errorMessage = signal('');
@@ -35,7 +37,7 @@ export class Login {
     this.authService.login(this.loginForm.getRawValue()).subscribe({
       next: () => {
         this.loading.set(false);
-        console.log('Connexion réussie');
+        this.router.navigate(['/events']);
       },
       error: (error) => {
         this.loading.set(false);

@@ -4,21 +4,24 @@
   <ui-card>
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-grid">
       <div class="form-group">
-        <input formControlName="nom" class="form-input" placeholder="Nom" />
+        <label class="form-label" for="nom">Nom</label>
+        <input id="nom" formControlName="nom" class="form-input" placeholder="Nom" />
         @if (form.get('nom')!.invalid && form.get('nom')!.touched) {
           <p class="form-error">Le nom est obligatoire</p>
         }
       </div>
 
       <div class="form-group">
-        <input formControlName="prenom" class="form-input" placeholder="Prénom" />
+        <label class="form-label" for="prenom">Prénom</label>
+        <input id="prenom" formControlName="prenom" class="form-input" placeholder="Prénom" />
         @if (form.get('prenom')!.invalid && form.get('prenom')!.touched) {
           <p class="form-error">Le prénom est obligatoire</p>
         }
       </div>
 
       <div class="form-group">
-        <input formControlName="email" class="form-input" placeholder="Email" type="email" />
+        <label class="form-label" for="email">Email</label>
+        <input id="email" formControlName="email" class="form-input" placeholder="Email" type="email" />
         @if (form.get('email')!.touched) {
           @if (form.get('email')!.hasError('required')) {
             <p class="form-error">L'email est obligatoire</p>
@@ -30,7 +33,8 @@
       </div>
 
       <div class="form-group">
-        <input formControlName="password" class="form-input" placeholder="Mot de passe" type="password" />
+        <label class="form-label" for="password">Mot de passe</label>
+        <input id="password" formControlName="password" class="form-input" placeholder="Mot de passe" type="password" />
         @if (form.get('password')!.touched) {
           @if (form.get('password')!.hasError('required')) {
             <p class="form-error">Le mot de passe est obligatoire</p>
@@ -42,7 +46,8 @@
       </div>
 
       <div class="form-group">
-        <select formControlName="role" class="form-select">
+        <label class="form-label" for="role">Rôle</label>
+        <select id="role" formControlName="role" class="form-select">
           <option value="ROLE_USER">Utilisateur</option>
           <option value="ROLE_ADMIN">Admin</option>
         </select>
