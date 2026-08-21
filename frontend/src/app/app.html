@@ -5,12 +5,12 @@
 
   <nav class="header-nav">
     @if (authService.isLoggedIn()) {
-      <a routerLink="/mes-inscriptions" class="nav-link">Mes inscriptions</a>
+      <a routerLink="/mes-inscriptions" routerLinkActive="nav-link-active" class="nav-link">Mes inscriptions</a>
     }
     @if (authService.isAdmin()) {
-      <a routerLink="/categories" class="nav-link">Catégories</a>
-      <a routerLink="/users" class="nav-link">Utilisateurs</a>
-      <a routerLink="/registrations" class="nav-link">Inscriptions</a>
+      <a routerLink="/categories" routerLinkActive="nav-link-active" class="nav-link">Catégories</a>
+      <a routerLink="/users" routerLinkActive="nav-link-active" class="nav-link">Utilisateurs</a>
+      <a routerLink="/registrations" routerLinkActive="nav-link-active" class="nav-link">Inscriptions</a>
     }
   </nav>
 
@@ -18,7 +18,7 @@
     @if (authService.isLoggedIn()) {
       <span class="header-user">{{ authService.currentUser()?.prenom }} {{ authService.currentUser()?.nom }}</span>
       <span class="header-role">{{ authService.currentUserRole() }}</span>
-      <button (click)="onLogout()">Déconnexion</button>
+      <button (click)="onLogout()" aria-label="Se déconnecter">Déconnexion</button>
     } @else {
       <a routerLink="/login" class="nav-link">Se connecter</a>
     }
