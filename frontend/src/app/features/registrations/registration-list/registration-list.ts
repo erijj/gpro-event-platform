@@ -1,12 +1,11 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Registration } from '../../../core/models/registration.model';
 import { RegistrationService } from '../../../core/services/registration.service';
-import { UiBadge } from '../../../shared/ui-badge/ui-badge';
 
 @Component({
   selector: 'app-registration-list',
-  imports: [CommonModule, UiBadge],
+  imports: [CommonModule],
   templateUrl: './registration-list.html',
   styleUrl: './registration-list.css'
 })
@@ -14,6 +13,9 @@ export class RegistrationList implements OnInit {
   registrations = signal<Registration[]>([]);
   loading = signal(true);
   errorMessage = signal('');
+
+  confirmed = computed(() => this.registrations().filter(r => r.statut === 'CONFIRMEE'));
+  cancelled = computed(() => this.registrations().filter(r => r.statut === 'ANNULEE'));
 
   constructor(private registrationService: RegistrationService) {}
 

@@ -73,6 +73,40 @@ tbody tr:hover {
   background-color: var(--bg-secondary);
 }
 
+.section-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.section-heading {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.section-count {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--text-muted);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 2px 8px;
+}
+
+.state-empty {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  padding: var(--space-4);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
 /* --- Responsive: Mobile --- */
 @media (max-width: 767px) {
   .table-wrapper {

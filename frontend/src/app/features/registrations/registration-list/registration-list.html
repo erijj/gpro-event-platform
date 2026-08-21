@@ -10,31 +10,62 @@
   }
 
   @if (!loading() && !errorMessage()) {
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>Utilisateur</th>
-            <th>Événement</th>
-            <th>Date d'inscription</th>
-            <th>Statut</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (registration of registrations(); track registration.id) {
-            <tr>
-              <td>{{ registration.userNomComplet }}</td>
-              <td>{{ registration.eventTitre }}</td>
-              <td>{{ registration.dateInscription }}</td>
-              <td>
-                <ui-badge [variant]="registration.statut === 'CONFIRMEE' ? 'success' : 'danger'">
-                  {{ registration.statut }}
-                </ui-badge>
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
+    <!-- Inscriptions confirmées -->
+    <section class="section-group">
+      <h3 class="section-heading">Inscriptions confirmées <span class="section-count">{{ confirmed().length }}</span></h3>
+      @if (confirmed().length === 0) {
+        <p class="state-empty">Aucune inscription confirmée.</p>
+      } @else {
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Utilisateur</th>
+                <th>Événement</th>
+                <th>Date d'inscription</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (registration of confirmed(); track registration.id) {
+                <tr>
+                  <td>{{ registration.userNomComplet }}</td>
+                  <td>{{ registration.eventTitre }}</td>
+                  <td>{{ registration.dateInscription }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+
+    <!-- Inscriptions annulées -->
+    <section class="section-group">
+      <h3 class="section-heading">Inscriptions annulées <span class="section-count">{{ cancelled().length }}</span></h3>
+      @if (cancelled().length === 0) {
+        <p class="state-empty">Aucune inscription annulée.</p>
+      } @else {
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Utilisateur</th>
+                <th>Événement</th>
+                <th>Date d'inscription</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (registration of cancelled(); track registration.id) {
+                <tr>
+                  <td>{{ registration.userNomComplet }}</td>
+                  <td>{{ registration.eventTitre }}</td>
+                  <td>{{ registration.dateInscription }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
   }
 </div>

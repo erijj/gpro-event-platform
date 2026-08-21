@@ -15,31 +15,62 @@
   }
 
   @if (!loading() && !errorMessage()) {
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Email</th>
-            <th>Rôle</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (user of users(); track user.id) {
-            <tr>
-              <td><a [routerLink]="['/users', user.id]" class="table-link">{{ user.nom }}</a></td>
-              <td>{{ user.prenom }}</td>
-              <td>{{ user.email }}</td>
-              <td>
-                <ui-badge [variant]="user.role === 'ROLE_ADMIN' ? 'danger' : 'info'">
-                  {{ user.role }}
-                </ui-badge>
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
+    <!-- Administrateurs -->
+    <section class="section-group">
+      <h3 class="section-heading">Administrateurs <span class="section-count">{{ admins().length }}</span></h3>
+      @if (admins().length === 0) {
+        <p class="state-empty">Aucun administrateur.</p>
+      } @else {
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (user of admins(); track user.id) {
+                <tr>
+                  <td><a [routerLink]="['/users', user.id]" class="table-link">{{ user.nom }}</a></td>
+                  <td>{{ user.prenom }}</td>
+                  <td>{{ user.email }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+
+    <!-- Utilisateurs -->
+    <section class="section-group">
+      <h3 class="section-heading">Utilisateurs <span class="section-count">{{ regularUsers().length }}</span></h3>
+      @if (regularUsers().length === 0) {
+        <p class="state-empty">Aucun utilisateur.</p>
+      } @else {
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (user of regularUsers(); track user.id) {
+                <tr>
+                  <td><a [routerLink]="['/users', user.id]" class="table-link">{{ user.nom }}</a></td>
+                  <td>{{ user.prenom }}</td>
+                  <td>{{ user.email }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
   }
 </div>
