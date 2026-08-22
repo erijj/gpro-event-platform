@@ -50,6 +50,10 @@ export class EventDetail implements OnInit {
   }
 
   onInscrire(): void {
+    if (this.authService.isAdmin()) {
+      this.inscriptionMessage.set('Les administrateurs ne peuvent pas s\'inscrire aux événements');
+      return;
+    }
     const userId = this.authService.currentUserId();
     if (!userId) {
       this.inscriptionMessage.set('Connectez-vous d\'abord');

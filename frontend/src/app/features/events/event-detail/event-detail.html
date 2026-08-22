@@ -47,7 +47,7 @@
       </div>
     </ui-card>
 
-    @if (authService.currentUserId() && event()!.placesRestantes > 0) {
+    @if (authService.currentUserId() && !authService.isAdmin() && event()!.placesRestantes > 0) {
       <ui-button variant="primary" (click)="onInscrire()">S'inscrire</ui-button>
     } @else if (event()!.placesRestantes === 0) {
       <p class="state-full">Plus de places disponibles</p>
