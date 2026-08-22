@@ -28,7 +28,8 @@ export class HeroBackgroundDirective implements OnDestroy {
     'rgba(255, 206, 90,',
   ];
 
-  private readonly PARTICLE_COUNT = 120;
+  private readonly MIN_PARTICLES = 80;
+  private readonly MAX_PARTICLES = 250;
 
   constructor(el: ElementRef<HTMLElement>) {
     afterNextRender(() => {
@@ -58,13 +59,19 @@ export class HeroBackgroundDirective implements OnDestroy {
     if (!this.canvas || !this.ctx) return;
     const parent = this.canvas.parentElement;
     if (!parent) return;
-    this.canvas.width = parent.clientWidth;
-    this.canvas.height = parent.clientHeight;
+    const newWidth = parent.clientWidth;
+    const newHeight = parent.clientHeight;
+    const widthChanged = Math.abs(newWidth - this.canvas.width) > 200;
+    this.canvas.width = newWidth;
+    this.canvas.height = newHeight;
+    if (widthChanged) this.spawnParticles();
   }
 
   private spawnParticles(): void {
+    const area = (this.canvas?.width ?? 800) * (this.canvas?.height ?? 600);
+    const count = Math.min(this.MAX_PARTICLES, Math.max(this.MIN_PARTICLES, Math.floor(area / 8000)));
     this.particles = [];
-    for (let i = 0; i < this.PARTICLE_COUNT; i++) {
+    for (let i = 0; i < count; i++) {
       this.particles.push(this.createParticle());
     }
   }
