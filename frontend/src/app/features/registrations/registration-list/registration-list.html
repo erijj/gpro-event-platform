@@ -12,59 +12,65 @@
   @if (!loading() && !errorMessage()) {
     <!-- Inscriptions confirmées -->
     <section class="section-group">
-      <h3 class="section-heading">Inscriptions confirmées <span class="section-count">{{ confirmed().length }}</span></h3>
-      @if (confirmed().length === 0) {
+      <h3 class="section-heading">Inscriptions confirmées <span class="section-count">{{ confirmedCount() }}</span></h3>
+      @if (confirmedGroups().length === 0) {
         <p class="state-empty">Aucune inscription confirmée.</p>
       } @else {
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Utilisateur</th>
-                <th>Événement</th>
-                <th>Date d'inscription</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (registration of confirmed(); track registration.id) {
-                <tr>
-                  <td>{{ registration.userNomComplet }}</td>
-                  <td>{{ registration.eventTitre }}</td>
-                  <td>{{ registration.dateInscription }}</td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        @for (group of confirmedGroups(); track group.eventTitre) {
+          <div class="event-group">
+            <h4 class="event-group-heading">{{ group.eventTitre }} <span class="event-group-count">{{ group.count }}</span></h4>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Utilisateur</th>
+                    <th>Date d'inscription</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (registration of group.registrations; track registration.id) {
+                    <tr>
+                      <td>{{ registration.userNomComplet }}</td>
+                      <td>{{ registration.dateInscription }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        }
       }
     </section>
 
     <!-- Inscriptions annulées -->
     <section class="section-group">
-      <h3 class="section-heading">Inscriptions annulées <span class="section-count">{{ cancelled().length }}</span></h3>
-      @if (cancelled().length === 0) {
+      <h3 class="section-heading">Inscriptions annulées <span class="section-count">{{ cancelledCount() }}</span></h3>
+      @if (cancelledGroups().length === 0) {
         <p class="state-empty">Aucune inscription annulée.</p>
       } @else {
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Utilisateur</th>
-                <th>Événement</th>
-                <th>Date d'inscription</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (registration of cancelled(); track registration.id) {
-                <tr>
-                  <td>{{ registration.userNomComplet }}</td>
-                  <td>{{ registration.eventTitre }}</td>
-                  <td>{{ registration.dateInscription }}</td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+        @for (group of cancelledGroups(); track group.eventTitre) {
+          <div class="event-group">
+            <h4 class="event-group-heading">{{ group.eventTitre }} <span class="event-group-count">{{ group.count }}</span></h4>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Utilisateur</th>
+                    <th>Date d'inscription</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (registration of group.registrations; track registration.id) {
+                    <tr>
+                      <td>{{ registration.userNomComplet }}</td>
+                      <td>{{ registration.dateInscription }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        }
       }
     </section>
   }
