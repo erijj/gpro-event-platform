@@ -9,7 +9,8 @@ import { UiButton } from '../../../shared/ui-button/ui-button';
   selector: 'app-user-create',
   standalone: true,
   imports: [ReactiveFormsModule, UiCard, UiButton],
-  templateUrl: './user-create.html'
+  templateUrl: './user-create.html',
+  styleUrl: './user-create.css'
 })
 export class UserCreate {
   private fb = inject(FormBuilder);
