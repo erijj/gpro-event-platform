@@ -11,7 +11,7 @@
     <h3 class="event-card-title">{{ event().titre }}</h3>
 
     <div class="event-card-meta">
-      <span class="event-card-date">{{ event().dateHeure }}</span>
+      <span class="event-card-date">{{ event().dateHeure | date:'dd/MM/yyyy HH:mm' }}</span>
       <span class="event-card-lieu">{{ event().lieu }}</span>
     </div>
 
