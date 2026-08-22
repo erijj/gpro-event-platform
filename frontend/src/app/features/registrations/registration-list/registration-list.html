@@ -31,7 +31,7 @@
                   @for (registration of group.registrations; track registration.id) {
                     <tr>
                       <td>{{ registration.userNomComplet }}</td>
-                      <td>{{ registration.dateInscription }}</td>
+                      <td>{{ registration.dateInscription | date:'dd/MM/yyyy HH:mm' }}</td>
                     </tr>
                   }
                 </tbody>
@@ -63,7 +63,7 @@
                   @for (registration of group.registrations; track registration.id) {
                     <tr>
                       <td>{{ registration.userNomComplet }}</td>
-                      <td>{{ registration.dateInscription }}</td>
+                      <td>{{ registration.dateInscription | date:'dd/MM/yyyy HH:mm' }}</td>
                     </tr>
                   }
                 </tbody>

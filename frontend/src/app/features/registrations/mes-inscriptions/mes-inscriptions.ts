@@ -1,4 +1,5 @@
 import { Component, inject, signal, OnInit, effect } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { RegistrationService } from '../../../core/services/registration.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Registration } from '../../../core/models/registration.model';
@@ -8,7 +9,7 @@ import { UiBadge } from '../../../shared/ui-badge/ui-badge';
 @Component({
   selector: 'app-mes-inscriptions',
   standalone: true,
-  imports: [UiButton, UiBadge],
+  imports: [DatePipe, UiButton, UiBadge],
   templateUrl: './mes-inscriptions.html'
 })
 export class MesInscriptions implements OnInit {

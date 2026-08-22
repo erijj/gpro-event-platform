@@ -1,4 +1,5 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EventService } from '../../../core/services/event.service';
 import { RegistrationService } from '../../../core/services/registration.service';
@@ -10,7 +11,7 @@ import { UiBadge } from '../../../shared/ui-badge/ui-badge';
 
 @Component({
   selector: 'app-event-detail',
-  imports: [RouterLink, UiCard, UiButton, UiBadge],
+  imports: [DatePipe, RouterLink, UiCard, UiButton, UiBadge],
   templateUrl: './event-detail.html',
   styleUrl: './event-detail.css'
 })

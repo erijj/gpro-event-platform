@@ -24,7 +24,7 @@
           @for (r of inscriptions(); track r.id) {
             <tr>
               <td>{{ r.eventTitre }}</td>
-              <td>{{ r.dateInscription }}</td>
+              <td>{{ r.dateInscription | date:'dd/MM/yyyy HH:mm' }}</td>
               <td>
                 <ui-badge [variant]="r.statut === 'CONFIRMEE' ? 'success' : 'danger'">
                   {{ r.statut }}
