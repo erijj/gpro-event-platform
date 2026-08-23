@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { UiCard } from '../../../shared/ui-card/ui-card';
 import { UiButton } from '../../../shared/ui-button/ui-button';
-import { HeroBackgroundDirective } from '../../../shared/hero-background/hero-background';
+import { PageParticlesDirective } from '../../../shared/page-particles/page-particles';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, UiCard, UiButton, HeroBackgroundDirective],
+  imports: [ReactiveFormsModule, UiCard, UiButton, PageParticlesDirective],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })

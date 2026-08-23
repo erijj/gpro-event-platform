@@ -2,14 +2,20 @@
    Event List Page — Dashboard with Hero Band
    ============================================ */
 
+/* --- Page particles background --- */
+.page-particles {
+  height: 0;
+  overflow: hidden;
+}
+
 /* --- Hero band --- */
 .hero-band {
   position: relative;
+  z-index: 1;
   height: 280px;
   overflow: hidden;
   border-radius: var(--radius-lg);
   margin-bottom: var(--space-8);
-  background-color: var(--bg-void);
 }
 
 .hero-content {
@@ -48,6 +54,8 @@
 
 /* --- Card grid --- */
 .card-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--space-6);

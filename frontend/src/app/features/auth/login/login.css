@@ -2,14 +2,18 @@
    Login Page
    ============================================ */
 
+/* --- Page particles background --- */
+.page-particles {
+  height: 0;
+  overflow: hidden;
+}
+
 .login-page {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 120px);
-  overflow: hidden;
-  background-color: var(--bg-void);
   animation: fadeInUp 350ms ease both;
 }
 

@@ -6,11 +6,11 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { UiButton } from '../../../shared/ui-button/ui-button';
 import { EventCard } from '../../../shared/event-card/event-card';
-import { HeroBackgroundDirective } from '../../../shared/hero-background/hero-background';
+import { PageParticlesDirective } from '../../../shared/page-particles/page-particles';
 
 @Component({
   selector: 'app-event-list',
-  imports: [CommonModule, RouterLink, UiButton, EventCard, HeroBackgroundDirective],
+  imports: [CommonModule, RouterLink, UiButton, EventCard, PageParticlesDirective],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css'
 })
