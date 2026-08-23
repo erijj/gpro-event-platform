@@ -30,6 +30,7 @@ export class HeroBackgroundDirective implements OnDestroy {
 
   private readonly MIN_PARTICLES = 80;
   private readonly MAX_PARTICLES = 250;
+  private readonly CELL_SIZE = 40;
 
   constructor(el: ElementRef<HTMLElement>) {
     afterNextRender(() => {
@@ -68,18 +69,32 @@ export class HeroBackgroundDirective implements OnDestroy {
   }
 
   private spawnParticles(): void {
-    const area = (this.canvas?.width ?? 800) * (this.canvas?.height ?? 600);
-    const count = Math.min(this.MAX_PARTICLES, Math.max(this.MIN_PARTICLES, Math.floor(area / 8000)));
+    const w = this.canvas?.width ?? 800;
+    const h = this.canvas?.height ?? 600;
+    const count = Math.min(this.MAX_PARTICLES, Math.max(this.MIN_PARTICLES, Math.floor((w * h) / 5000)));
     this.particles = [];
+
+    const cols = Math.ceil(w / this.CELL_SIZE);
+    const rows = Math.ceil(h / this.CELL_SIZE);
+    const totalCells = cols * rows;
+
     for (let i = 0; i < count; i++) {
-      this.particles.push(this.createParticle());
+      const cell = i % totalCells;
+      const col = cell % cols;
+      const row = Math.floor(cell / cols);
+      const baseX = col * this.CELL_SIZE;
+      const baseY = row * this.CELL_SIZE;
+      this.particles.push(this.createParticleAt(
+        baseX + Math.random() * this.CELL_SIZE,
+        baseY + Math.random() * this.CELL_SIZE
+      ));
     }
   }
 
-  private createParticle(): Particle {
+  private createParticleAt(x: number, y: number): Particle {
     return {
-      x: Math.random() * (this.canvas?.width ?? 800),
-      y: Math.random() * (this.canvas?.height ?? 600),
+      x,
+      y,
       vx: (Math.random() - 0.5) * 0.3,
       vy: -Math.random() * 0.4 - 0.1,
       radius: Math.random() * 2 + 0.5,
