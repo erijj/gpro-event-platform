@@ -35,6 +35,7 @@ export class HeroBackgroundDirective implements OnDestroy {
   constructor(el: ElementRef<HTMLElement>) {
     afterNextRender(() => {
       this.init(el.nativeElement);
+      setTimeout(() => this.resize(), 0);
     });
   }
 
@@ -58,19 +59,16 @@ export class HeroBackgroundDirective implements OnDestroy {
 
   private resize(): void {
     if (!this.canvas || !this.ctx) return;
-    const parent = this.canvas.parentElement;
-    if (!parent) return;
-    const newWidth = parent.clientWidth;
-    const newHeight = parent.clientHeight;
-    const widthChanged = Math.abs(newWidth - this.canvas.width) > 200;
-    this.canvas.width = newWidth;
-    this.canvas.height = newHeight;
-    if (widthChanged) this.spawnParticles();
+    const rect = this.canvas.getBoundingClientRect();
+    const w = Math.floor(rect.width);
+    const h = Math.floor(rect.height);
+    if (w < 1 || h < 1) return;
+    this.canvas.width = w;
+    this.canvas.height = h;
+    this.spawnParticles(w, h);
   }
 
-  private spawnParticles(): void {
-    const w = this.canvas?.width ?? 800;
-    const h = this.canvas?.height ?? 600;
+  private spawnParticles(w: number, h: number): void {
     const count = Math.min(this.MAX_PARTICLES, Math.max(this.MIN_PARTICLES, Math.floor((w * h) / 5000)));
     this.particles = [];
 
