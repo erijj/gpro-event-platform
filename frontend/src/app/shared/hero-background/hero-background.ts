@@ -28,8 +28,9 @@ export class HeroBackgroundDirective implements OnDestroy {
     'rgba(255, 206, 90,',
   ];
 
-  private readonly MIN_PARTICLES = 80;
-  private readonly MAX_PARTICLES = 250;
+  private readonly PARTICLES_PER_SQ_PX = 2200;
+  private readonly MIN_PARTICLES = 120;
+  private readonly MAX_PARTICLES = 300;
   private readonly CELL_SIZE = 40;
 
   constructor(el: ElementRef<HTMLElement>) {
@@ -50,7 +51,6 @@ export class HeroBackgroundDirective implements OnDestroy {
     if (!this.ctx) return;
 
     this.resize();
-    this.spawnParticles();
     this.animate();
 
     this.resizeObserver = new ResizeObserver(() => this.resize());
@@ -69,23 +69,38 @@ export class HeroBackgroundDirective implements OnDestroy {
   }
 
   private spawnParticles(w: number, h: number): void {
-    const count = Math.min(this.MAX_PARTICLES, Math.max(this.MIN_PARTICLES, Math.floor((w * h) / 5000)));
+    const count = Math.min(
+      this.MAX_PARTICLES,
+      Math.max(this.MIN_PARTICLES, Math.floor((w * h) / this.PARTICLES_PER_SQ_PX))
+    );
     this.particles = [];
 
     const cols = Math.ceil(w / this.CELL_SIZE);
     const rows = Math.ceil(h / this.CELL_SIZE);
-    const totalCells = cols * rows;
 
-    for (let i = 0; i < count; i++) {
-      const cell = i % totalCells;
-      const col = cell % cols;
-      const row = Math.floor(cell / cols);
-      const baseX = col * this.CELL_SIZE;
-      const baseY = row * this.CELL_SIZE;
-      this.particles.push(this.createParticleAt(
-        baseX + Math.random() * this.CELL_SIZE,
-        baseY + Math.random() * this.CELL_SIZE
-      ));
+    const base = Math.floor(count / cols);
+    let remainder = count - base * cols;
+    const colCounts: number[] = [];
+    for (let c = 0; c < cols; c++) {
+      colCounts.push(base + (remainder-- > 0 ? 1 : 0));
+    }
+
+    for (let c = 0; c < cols; c++) {
+      const n = colCounts[c];
+      const baseX = c * this.CELL_SIZE;
+      const shuffled = Array.from({ length: rows }, (_, i) => i);
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      for (let i = 0; i < n; i++) {
+        const row = shuffled[i % rows];
+        const baseY = row * this.CELL_SIZE;
+        this.particles.push(this.createParticleAt(
+          baseX + Math.random() * this.CELL_SIZE,
+          baseY + Math.random() * this.CELL_SIZE
+        ));
+      }
     }
   }
 
