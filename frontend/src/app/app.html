@@ -4,7 +4,7 @@
   </div>
 
   <nav class="header-nav">
-    @if (authService.isLoggedIn()) {
+    @if (authService.isLoggedIn() && !authService.isAdmin()) {
       <a routerLink="/mes-inscriptions" routerLinkActive="nav-link-active" class="nav-link">Mes inscriptions</a>
     }
     @if (authService.isAdmin()) {
