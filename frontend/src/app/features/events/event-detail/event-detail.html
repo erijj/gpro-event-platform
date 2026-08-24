@@ -47,6 +47,33 @@
       </div>
     </ui-card>
 
+    @if (!isOnline()) {
+      <div class="detail-location">
+        <h3 class="location-title">Localisation du lieu</h3>
+
+        <div class="location-map">
+          <iframe
+            [src]="mapUrl()"
+            width="100%"
+            height="100%"
+            style="border:0;"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Aperçu de la carte">
+          </iframe>
+        </div>
+
+        <div class="location-info">
+          <span class="location-pin">&#128205;</span>
+          <span class="location-address">{{ event()!.lieu }}</span>
+        </div>
+
+        <a [href]="directionsUrl()" target="_blank" rel="noopener noreferrer">
+          <ui-button variant="primary">Itinéraire</ui-button>
+        </a>
+      </div>
+    }
+
     @if (authService.currentUserId() && !authService.isAdmin() && event()!.placesRestantes > 0) {
       <ui-button variant="primary" (click)="onInscrire()">S'inscrire</ui-button>
     } @else if (event()!.placesRestantes === 0) {

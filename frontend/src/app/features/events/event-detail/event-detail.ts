@@ -1,5 +1,6 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EventService } from '../../../core/services/event.service';
 import { RegistrationService } from '../../../core/services/registration.service';
@@ -19,6 +20,7 @@ export class EventDetail implements OnInit {
   private route = inject(ActivatedRoute);
   private eventService = inject(EventService);
   private registrationService = inject(RegistrationService);
+  private sanitizer = inject(DomSanitizer);
   authService = inject(AuthService);
   private router = inject(Router);
 
@@ -27,6 +29,28 @@ export class EventDetail implements OnInit {
   loading = signal(true);
   errorMessage = signal<string | null>(null);
   inscriptionMessage = signal<string | null>(null);
+
+  private static readonly ONLINE_KEYWORDS = ['en ligne', 'online', 'visio', 'virtuel', 'zoom', 'teams', 'meet'];
+
+  isOnline = computed(() => {
+    const e = this.event();
+    if (!e) return false;
+    const lieu = e.lieu.trim().toLowerCase();
+    return EventDetail.ONLINE_KEYWORDS.some(k => lieu.includes(k));
+  });
+
+  mapUrl = computed(() => {
+    const e = this.event();
+    if (!e) return '';
+    const url = `https://www.google.com/maps?q=${encodeURIComponent(e.lieu)}&output=embed`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  });
+
+  directionsUrl = computed(() => {
+    const e = this.event();
+    if (!e) return '';
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(e.lieu)}`;
+  });
 
   ngOnInit(): void {
     this.eventService.getById(this.eventId).subscribe({
