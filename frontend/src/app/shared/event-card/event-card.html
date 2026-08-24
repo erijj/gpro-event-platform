@@ -1,7 +1,7 @@
 <a [routerLink]="['/events', event().id]" class="event-card">
   <div class="event-card-photo">
-    @if (event().image) {
-      <img [src]="event().image" [alt]="event().titre" />
+    @if (event().image && event().image!.length > 0 && !imageFailed()) {
+      <img [src]="event().image" [alt]="event().titre" (error)="onImageError()" />
     } @else {
       <div class="event-card-placeholder"></div>
     }
