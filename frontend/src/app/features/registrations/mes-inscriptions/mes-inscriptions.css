@@ -2,17 +2,31 @@
    Mes Inscriptions Page
    ============================================ */
 
-.page {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  animation: fadeInUp 350ms ease both;
+/* --- Hero band --- */
+.hero-band {
+  position: relative;
+  z-index: 1;
+  height: 280px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-8);
 }
 
-.page-title {
-  font-size: var(--text-2xl);
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 var(--space-8);
+}
+
+.hero-title {
+  font-size: var(--text-3xl);
   font-weight: 700;
   color: var(--text-primary);
+  margin: 0;
 }
 
 .state-loading {
@@ -80,8 +94,31 @@ tbody tr:hover {
   background-color: var(--bg-secondary);
 }
 
+/* --- Responsive: Tablet --- */
+@media (max-width: 1199px) {
+  .hero-band {
+    height: 220px;
+  }
+
+  .hero-content {
+    padding: 0 var(--space-6);
+  }
+}
+
 /* --- Responsive: Mobile --- */
 @media (max-width: 767px) {
+  .hero-band {
+    height: 180px;
+  }
+
+  .hero-content {
+    padding: 0 var(--space-4);
+  }
+
+  .hero-title {
+    font-size: var(--text-2xl);
+  }
+
   .table-wrapper {
     border-radius: 0;
     border-left: none;

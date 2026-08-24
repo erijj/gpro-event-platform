@@ -90,7 +90,12 @@ export class EventDetail implements OnInit {
         this.eventService.getById(this.eventId).subscribe((data) => this.event.set(data));
       },
       error: (err) => {
-        this.inscriptionMessage.set(err.error?.message || 'Erreur : déjà inscrit ou plus de places');
+        const msg: string = err.error?.message || '';
+        this.inscriptionMessage.set(
+          msg.includes('déjà inscrit')
+            ? 'Vous êtes déjà inscrit à cet événement.'
+            : msg || 'Erreur : déjà inscrit ou plus de places'
+        );
       }
     });
   }

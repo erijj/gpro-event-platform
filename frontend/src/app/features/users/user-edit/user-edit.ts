@@ -9,7 +9,8 @@ import { UiButton } from '../../../shared/ui-button/ui-button';
   selector: 'app-user-edit',
   standalone: true,
   imports: [ReactiveFormsModule, UiCard, UiButton],
-  templateUrl: './user-edit.html'
+  templateUrl: './user-edit.html',
+  styleUrl: './user-edit.css'
 })
 export class UserEdit implements OnInit {
   private fb = inject(FormBuilder);

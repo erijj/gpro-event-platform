@@ -1,7 +1,10 @@
-<div class="page">
-  <h2 class="page-title">Mes inscriptions</h2>
+<div class="hero-band">
+  <div class="hero-content">
+    <h1 class="hero-title">Mes inscriptions</h1>
+  </div>
+</div>
 
-  @if (!authService.currentUserId()) {
+@if (!authService.currentUserId()) {
     <p class="state-info">Connectez-vous pour voir vos inscriptions.</p>
   } @else if (loading()) {
     <p class="state-loading">Chargement...</p>
@@ -41,4 +44,3 @@
       </table>
     </div>
   }
-</div>

@@ -10,7 +10,8 @@ import { UiBadge } from '../../../shared/ui-badge/ui-badge';
   selector: 'app-mes-inscriptions',
   standalone: true,
   imports: [DatePipe, UiButton, UiBadge],
-  templateUrl: './mes-inscriptions.html'
+  templateUrl: './mes-inscriptions.html',
+  styleUrl: './mes-inscriptions.css'
 })
 export class MesInscriptions implements OnInit {
   private registrationService = inject(RegistrationService);
