@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Event } from '../../core/models/event.model';
@@ -13,4 +13,9 @@ import { UiBadge } from '../ui-badge/ui-badge';
 })
 export class EventCard {
   event = input.required<Event>();
+  imageFailed = signal(false);
+
+  onImageError(): void {
+    this.imageFailed.set(true);
+  }
 }

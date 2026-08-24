@@ -16,6 +16,14 @@
       }
     </div>
 
+    <div class="detail-hero">
+      @if (event()!.image && event()!.image!.length > 0 && !imageFailed()) {
+        <img [src]="event()!.image" [alt]="event()!.titre" class="detail-hero-img" (error)="onImageError()" />
+      } @else {
+        <div class="detail-hero-placeholder"></div>
+      }
+    </div>
+
     <ui-card>
       <div class="detail-grid">
         <div class="detail-item">

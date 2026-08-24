@@ -28,7 +28,8 @@ export class EventCreate implements OnInit {
     dateHeure: ['', Validators.required],
     lieu: ['', Validators.required],
     capaciteMax: [1, [Validators.required, Validators.min(1)]],
-    categoryId: [null as number | null, Validators.required]
+    categoryId: [null as number | null, Validators.required],
+    image: ['']
   });
 
   ngOnInit(): void {
@@ -46,7 +47,8 @@ export class EventCreate implements OnInit {
       dateHeure: this.form.value.dateHeure!,
       lieu: this.form.value.lieu!,
       capaciteMax: this.form.value.capaciteMax!,
-      categoryId: this.form.value.categoryId!
+      categoryId: this.form.value.categoryId!,
+      image: this.form.value.image || null
     }).subscribe({
       next: () => this.router.navigate(['/events']),
       error: () => this.errorMessage.set('Erreur lors de la création')

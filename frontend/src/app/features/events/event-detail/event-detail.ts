@@ -27,6 +27,11 @@ export class EventDetail implements OnInit {
   loading = signal(true);
   errorMessage = signal<string | null>(null);
   inscriptionMessage = signal<string | null>(null);
+  imageFailed = signal(false);
+
+  onImageError(): void {
+    this.imageFailed.set(true);
+  }
 
   ngOnInit(): void {
     this.eventService.getById(this.eventId).subscribe({
