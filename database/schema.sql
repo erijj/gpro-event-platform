@@ -67,10 +67,12 @@ CREATE TABLE registration (
     CONSTRAINT fk_registration_event
         FOREIGN KEY (event_id)
         REFERENCES event(id)
-        ON DELETE CASCADE,
-
-    CONSTRAINT uq_user_event UNIQUE (user_id, event_id)
+        ON DELETE CASCADE
 );
+
+CREATE UNIQUE INDEX uq_user_event_confirmee
+    ON registration(user_id, event_id)
+    WHERE statut = 'CONFIRMEE';
 
 CREATE INDEX idx_event_category ON event(category_id);
 CREATE INDEX idx_registration_user ON registration(user_id);

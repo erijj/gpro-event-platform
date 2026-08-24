@@ -58,13 +58,14 @@ public class RegistrationService {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Événement introuvable avec l'id : " + eventId));
 
-        // Règle 1 : pas de double inscription
-        registrationRepository.findByUserAndEvent(user, event).ifPresent(r -> {
-            throw new BusinessRuleException("L'utilisateur est déjà inscrit à cet événement");
-        });
+        // Règle 1 : pas de double inscription active
+        registrationRepository.findByUserAndEventAndStatut(user, event, Registration.Statut.CONFIRMEE)
+            .ifPresent(r -> {
+                throw new BusinessRuleException("L'utilisateur est déjà inscrit à cet événement");
+            });
 
         // Règle 2 : vérifier qu'il reste des places
-        long placesPrises = registrationRepository.countByEvent(event);
+        long placesPrises = registrationRepository.countByEventAndStatut(event, Registration.Statut.CONFIRMEE);
         if (placesPrises >= event.getCapaciteMax()) {
             throw new BusinessRuleException("Plus de places disponibles pour cet événement");
         }

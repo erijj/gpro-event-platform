@@ -11,9 +11,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 @Entity
-@Table(name = "registration", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"user_id", "event_id"})
-})
+@Table(name = "registration")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

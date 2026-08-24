@@ -101,4 +101,15 @@ class RegistrationServiceTest {
                 .isInstanceOf(BusinessRuleException.class)
                 .hasMessageContaining("Plus de places");
     }
+
+    @Test
+    void testInscrire_reinscriptionApresAnnulation_succes() {
+        RegistrationDto premiere = registrationService.inscrire(user.getId(), event.getId());
+        registrationService.annuler(premiere.getId());
+
+        RegistrationDto deuxieme = registrationService.inscrire(user.getId(), event.getId());
+
+        assertThat(deuxieme.getStatut().name()).isEqualTo("CONFIRMEE");
+        assertThat(deuxieme.getId()).isNotEqualTo(premiere.getId());
+    }
 }
