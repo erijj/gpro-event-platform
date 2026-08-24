@@ -1,0 +1,16 @@
+<label class="ui-input-wrapper">
+  @if (label()) {
+    <span class="ui-input-label">{{ label() }}</span>
+  }
+  <input
+    class="ui-input-field"
+    [class.ui-input-error]="error()"
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [name]="name()"
+    [value]="value()"
+  />
+  @if (error()) {
+    <span class="ui-input-error-text">{{ error() }}</span>
+  }
+</label>

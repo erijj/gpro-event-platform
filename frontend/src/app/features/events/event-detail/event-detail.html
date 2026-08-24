@@ -1,29 +1,68 @@
 @if (loading()) {
-  <p>Chargement...</p>
+  <p class="state-loading">Chargement...</p>
 } @else if (errorMessage()) {
-  <p>{{ errorMessage() }}</p>
+  <p class="state-error">{{ errorMessage() }}</p>
 } @else if (event()) {
-  <h2>{{ event()!.titre }}</h2>
-  <p>{{ event()!.description }}</p>
-  <p>Date : {{ event()!.dateHeure }}</p>
-  <p>Lieu : {{ event()!.lieu }}</p>
-  <p>Places restantes : {{ event()!.placesRestantes }} / {{ event()!.capaciteMax }}</p>
-  <p>Catégorie : {{ event()!.category.libelle }}</p>
-  <p>Statut : {{ event()!.statut }}</p>
- 
-  @if (authService.isAdmin()) {
-  <a [routerLink]="['/events', event()!.id, 'edit']">Modifier</a>
-  <button (click)="onDelete()">Supprimer</button>
-  }
+  <div class="page">
+    <div class="page-header">
+      <h2 class="page-title">{{ event()!.titre }}</h2>
+      @if (authService.isAdmin()) {
+        <div class="page-actions">
+          <a [routerLink]="['/events', event()!.id, 'edit']">
+            <ui-button variant="ghost">Modifier</ui-button>
+          </a>
+          <ui-button variant="danger" (click)="onDelete()">Supprimer</ui-button>
+        </div>
+      }
+    </div>
 
-  @if (authService.currentUserId() && event()!.placesRestantes > 0)  {
-  <button (click)="onInscrire()">S'inscrire</button>
-} @else if (event()!.placesRestantes === 0) {
-  <p>Plus de places disponibles</p>
-}
+    <div class="detail-hero">
+      @if (event()!.image && event()!.image!.length > 0 && !imageFailed()) {
+        <img [src]="event()!.image" [alt]="event()!.titre" class="detail-hero-img" (error)="onImageError()" />
+      } @else {
+        <div class="detail-hero-placeholder"></div>
+      }
+    </div>
 
-@if (inscriptionMessage()) {
-  <p>{{ inscriptionMessage() }}</p>
-}
+    <ui-card>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <span class="detail-label">Description</span>
+          <p class="detail-value">{{ event()!.description }}</p>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Date</span>
+          <p class="detail-value">{{ event()!.dateHeure | date:'dd/MM/yyyy HH:mm' }}</p>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Lieu</span>
+          <p class="detail-value">{{ event()!.lieu }}</p>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Places</span>
+          <p class="detail-value">{{ event()!.placesRestantes }} / {{ event()!.capaciteMax }}</p>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Catégorie</span>
+          <p class="detail-value">{{ event()!.category.libelle }}</p>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Statut</span>
+          <ui-badge [variant]="event()!.statut === 'PLANIFIE' ? 'info' : event()!.statut === 'EN_COURS' ? 'warning' : event()!.statut === 'TERMINE' ? 'success' : 'danger'">
+            {{ event()!.statut }}
+          </ui-badge>
+        </div>
+      </div>
+    </ui-card>
 
+    @if (authService.currentUserId() && !authService.isAdmin() && event()!.placesRestantes > 0) {
+      <ui-button variant="primary" (click)="onInscrire()">S'inscrire</ui-button>
+    } @else if (event()!.placesRestantes === 0) {
+      <p class="state-full">Plus de places disponibles</p>
+    }
+
+    @if (inscriptionMessage()) {
+      <p class="inscription-msg">{{ inscriptionMessage() }}</p>
+    }
+  </div>
 }

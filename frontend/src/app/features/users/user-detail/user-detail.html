@@ -1,12 +1,36 @@
 @if (loading()) {
-  <p>Chargement...</p>
+  <p class="state-loading">Chargement...</p>
 } @else if (errorMessage()) {
-  <p>{{ errorMessage() }}</p>
+  <p class="state-error">{{ errorMessage() }}</p>
 } @else if (user()) {
-  <h2>{{ user()!.nom }} {{ user()!.prenom }}</h2>
-  <p>Email : {{ user()!.email }}</p>
-  <p>Rôle : {{ user()!.role }}</p>
-  <p>Créé le : {{ user()!.createdAt }}</p>
-  <a [routerLink]="['/users', user()!.id, 'edit']">Modifier</a>
-  <button (click)="onDelete()">Supprimer</button>
+  <div class="page">
+    <div class="page-header">
+      <h2 class="page-title">{{ user()!.nom }} {{ user()!.prenom }}</h2>
+      <div class="page-actions">
+        <a [routerLink]="['/users', user()!.id, 'edit']">
+          <ui-button variant="ghost">Modifier</ui-button>
+        </a>
+        <ui-button variant="danger" (click)="onDelete()">Supprimer</ui-button>
+      </div>
+    </div>
+
+    <ui-card>
+      <div class="detail-grid">
+        <div class="detail-item">
+          <span class="detail-label">Email</span>
+          <p class="detail-value">{{ user()!.email }}</p>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Rôle</span>
+          <ui-badge [variant]="user()!.role === 'ROLE_ADMIN' ? 'danger' : 'info'">
+            {{ user()!.role }}
+          </ui-badge>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Créé le</span>
+          <p class="detail-value">{{ user()!.createdAt }}</p>
+        </div>
+      </div>
+    </ui-card>
+  </div>
 }

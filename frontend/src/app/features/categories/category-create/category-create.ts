@@ -2,10 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../../core/services/category.service';
+import { UiCard } from '../../../shared/ui-card/ui-card';
+import { UiButton } from '../../../shared/ui-button/ui-button';
 
 @Component({
   selector: 'app-category-create',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, UiCard, UiButton],
   templateUrl: './category-create.html',
   styleUrl: './category-create.css'
 })

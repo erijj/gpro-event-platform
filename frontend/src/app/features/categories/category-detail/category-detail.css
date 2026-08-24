@@ -1,0 +1,58 @@
+/* ============================================
+   Category Detail Page
+   ============================================ */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  animation: fadeInUp 350ms ease both;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.page-title {
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.page-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.state-loading {
+  text-align: center;
+  padding: var(--space-12) 0;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.state-error {
+  color: var(--danger);
+  background-color: rgba(194, 59, 46, 0.1);
+  border: 1px solid rgba(194, 59, 46, 0.25);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.detail-info {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+/* --- Responsive: Mobile --- */
+@media (max-width: 767px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

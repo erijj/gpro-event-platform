@@ -50,6 +50,11 @@ public class RegistrationService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Utilisateur introuvable avec l'id : " + userId));
 
+        // Règle 0 : les administrateurs ne s'inscrivent pas aux événements
+        if (user.getRole() == User.Role.ROLE_ADMIN) {
+            throw new BusinessRuleException("Les administrateurs ne peuvent pas s'inscrire à un événement");
+        }
+
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Événement introuvable avec l'id : " + eventId));
 

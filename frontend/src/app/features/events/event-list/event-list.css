@@ -1,0 +1,99 @@
+/* ============================================
+   Event List Page — Dashboard with Hero Band
+   ============================================ */
+
+/* --- Page particles background --- */
+.page-particles {
+  height: 0;
+  overflow: hidden;
+}
+
+/* --- Hero band --- */
+.hero-band {
+  position: relative;
+  z-index: 1;
+  height: 280px;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-8);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 var(--space-8);
+}
+
+.hero-title {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+/* --- States --- */
+.state-loading {
+  text-align: center;
+  padding: var(--space-12) 0;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.state-error {
+  color: var(--danger);
+  background-color: rgba(194, 59, 46, 0.1);
+  border: 1px solid rgba(194, 59, 46, 0.25);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+}
+
+/* --- Card grid --- */
+.card-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-6);
+  animation: fadeInUp 350ms ease both;
+  animation-delay: 100ms;
+}
+
+/* --- Responsive: Tablet --- */
+@media (max-width: 1199px) {
+  .hero-band {
+    height: 220px;
+  }
+
+  .hero-content {
+    padding: 0 var(--space-6);
+  }
+
+  .card-grid {
+    gap: var(--space-4);
+  }
+}
+
+/* --- Responsive: Mobile --- */
+@media (max-width: 767px) {
+  .hero-band {
+    height: 180px;
+  }
+
+  .hero-content {
+    padding: 0 var(--space-4);
+  }
+
+  .hero-title {
+    font-size: var(--text-2xl);
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}

@@ -1,24 +1,77 @@
-<h2>Liste des inscriptions</h2>
+<div class="page">
+  <h2 class="page-title">Liste des inscriptions</h2>
 
-<p *ngIf="loading()">Chargement...</p>
+  @if (loading()) {
+    <p class="state-loading">Chargement...</p>
+  }
 
-<p *ngIf="errorMessage()" class="error">{{ errorMessage() }}</p>
+  @if (errorMessage()) {
+    <p class="state-error">{{ errorMessage() }}</p>
+  }
 
-<table *ngIf="!loading() && !errorMessage()">
-  <thead>
-    <tr>
-      <th>Utilisateur</th>
-      <th>Événement</th>
-      <th>Date d'inscription</th>
-      <th>Statut</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let registration of registrations()">
-      <td>{{ registration.userNomComplet }}</td>
-      <td>{{ registration.eventTitre }}</td>
-      <td>{{ registration.dateInscription }}</td>
-      <td>{{ registration.statut }}</td>
-    </tr>
-  </tbody>
-</table>
+  @if (!loading() && !errorMessage()) {
+    <!-- Inscriptions confirmées -->
+    <section class="section-group">
+      <h3 class="section-heading">Inscriptions confirmées <span class="section-count">{{ confirmedCount() }}</span></h3>
+      @if (confirmedGroups().length === 0) {
+        <p class="state-empty">Aucune inscription confirmée.</p>
+      } @else {
+        @for (group of confirmedGroups(); track group.eventTitre) {
+          <div class="event-group">
+            <h4 class="event-group-heading">{{ group.eventTitre }} <span class="event-group-count">{{ group.count }}</span></h4>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Utilisateur</th>
+                    <th>Date d'inscription</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (registration of group.registrations; track registration.id) {
+                    <tr>
+                      <td>{{ registration.userNomComplet }}</td>
+                      <td>{{ registration.dateInscription | date:'dd/MM/yyyy HH:mm' }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        }
+      }
+    </section>
+
+    <!-- Inscriptions annulées -->
+    <section class="section-group">
+      <h3 class="section-heading">Inscriptions annulées <span class="section-count">{{ cancelledCount() }}</span></h3>
+      @if (cancelledGroups().length === 0) {
+        <p class="state-empty">Aucune inscription annulée.</p>
+      } @else {
+        @for (group of cancelledGroups(); track group.eventTitre) {
+          <div class="event-group">
+            <h4 class="event-group-heading">{{ group.eventTitre }} <span class="event-group-count">{{ group.count }}</span></h4>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Utilisateur</th>
+                    <th>Date d'inscription</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (registration of group.registrations; track registration.id) {
+                    <tr>
+                      <td>{{ registration.userNomComplet }}</td>
+                      <td>{{ registration.dateInscription | date:'dd/MM/yyyy HH:mm' }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        }
+      }
+    </section>
+  }
+</div>

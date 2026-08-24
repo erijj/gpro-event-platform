@@ -1,25 +1,76 @@
-<h2>Liste des utilisateurs</h2>
-<a routerLink="/users/create">+ Créer un utilisateur</a>
+<div class="page">
+  <div class="page-header">
+    <h2 class="page-title">Liste des utilisateurs</h2>
+    <a routerLink="/users/create">
+      <ui-button variant="primary">+ Créer un utilisateur</ui-button>
+    </a>
+  </div>
 
-<p *ngIf="loading()">Chargement...</p>
+  @if (loading()) {
+    <p class="state-loading">Chargement...</p>
+  }
 
-<p *ngIf="errorMessage()" class="error">{{ errorMessage() }}</p>
+  @if (errorMessage()) {
+    <p class="state-error">{{ errorMessage() }}</p>
+  }
 
-<table *ngIf="!loading() && !errorMessage()">
-  <thead>
-    <tr>
-      <th>Nom</th>
-      <th>Prénom</th>
-      <th>Email</th>
-      <th>Rôle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users()">
-      <td><a [routerLink]="['/users', user.id]">{{ user.nom }}</a></td>
-      <td>{{ user.prenom }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.role }}</td>
-    </tr>
-  </tbody>
-</table>
+  @if (!loading() && !errorMessage()) {
+    <!-- Administrateurs -->
+    <section class="section-group">
+      <h3 class="section-heading">Administrateurs <span class="section-count">{{ admins().length }}</span></h3>
+      @if (admins().length === 0) {
+        <p class="state-empty">Aucun administrateur.</p>
+      } @else {
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (user of admins(); track user.id) {
+                <tr>
+                  <td><a [routerLink]="['/users', user.id]" class="table-link">{{ user.nom }}</a></td>
+                  <td>{{ user.prenom }}</td>
+                  <td>{{ user.email }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+
+    <!-- Utilisateurs -->
+    <section class="section-group">
+      <h3 class="section-heading">Utilisateurs <span class="section-count">{{ regularUsers().length }}</span></h3>
+      @if (regularUsers().length === 0) {
+        <p class="state-empty">Aucun utilisateur.</p>
+      } @else {
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (user of regularUsers(); track user.id) {
+                <tr>
+                  <td><a [routerLink]="['/users', user.id]" class="table-link">{{ user.nom }}</a></td>
+                  <td>{{ user.prenom }}</td>
+                  <td>{{ user.email }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </section>
+  }
+</div>

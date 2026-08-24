@@ -4,11 +4,13 @@ import { CategoryService } from '../../../core/services/category.service';
 import { Category } from '../../../core/models/category.model';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { UiCard } from '../../../shared/ui-card/ui-card';
+import { UiButton } from '../../../shared/ui-button/ui-button';
 
 
 @Component({
   selector: 'app-category-detail',
-  imports: [RouterLink],
+  imports: [RouterLink, UiCard, UiButton],
   templateUrl: './category-detail.html',
   styleUrl: './category-detail.css'
 })

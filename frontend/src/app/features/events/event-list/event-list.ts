@@ -4,10 +4,13 @@ import { Event } from '../../../core/models/event.model';
 import { EventService } from '../../../core/services/event.service';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { UiButton } from '../../../shared/ui-button/ui-button';
+import { EventCard } from '../../../shared/event-card/event-card';
+import { PageParticlesDirective } from '../../../shared/page-particles/page-particles';
 
 @Component({
   selector: 'app-event-list',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, UiButton, EventCard, PageParticlesDirective],
   templateUrl: './event-list.html',
   styleUrl: './event-list.css'
 })

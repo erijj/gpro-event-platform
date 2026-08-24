@@ -1,22 +1,28 @@
-<h2>Liste des catégories</h2>
-@if (authService.isAdmin()) {
-<a routerLink="/categories/create">+ Nouvelle catégorie</a>
-}
+<div class="page">
+  <div class="page-header">
+    <h2 class="page-title">Catégories</h2>
+    @if (authService.isAdmin()) {
+      <a routerLink="/categories/create">
+        <ui-button variant="primary">+ Nouvelle catégorie</ui-button>
+      </a>
+    }
+  </div>
 
+  @if (loading()) {
+    <p class="state-loading">Chargement...</p>
+  }
 
-<p *ngIf="loading()">Chargement...</p>
+  @if (errorMessage()) {
+    <p class="state-error">{{ errorMessage() }}</p>
+  }
 
-<p *ngIf="errorMessage()" class="error">{{ errorMessage() }}</p>
-
-<table *ngIf="!loading() && !errorMessage()">
-  <thead>
-    <tr>
-      <th>Libellé</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let category of categories()">
-      <td><a [routerLink]="['/categories', category.id]">{{ category.libelle }}</a></td>
-    </tr>
-  </tbody>
-</table>
+  @if (!loading() && !errorMessage()) {
+    <div class="chip-cloud">
+      @for (category of categories(); track category.id) {
+        <a [routerLink]="['/categories', category.id]" class="category-chip">
+          {{ category.libelle }}
+        </a>
+      }
+    </div>
+  }
+</div>

@@ -2,11 +2,13 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../../core/services/user.service';
+import { UiCard } from '../../../shared/ui-card/ui-card';
+import { UiButton } from '../../../shared/ui-button/ui-button';
 
 @Component({
   selector: 'app-user-edit',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, UiCard, UiButton],
   templateUrl: './user-edit.html'
 })
 export class UserEdit implements OnInit {

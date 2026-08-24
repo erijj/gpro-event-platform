@@ -1,13 +1,17 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EventService } from '../../../core/services/event.service';
 import { RegistrationService } from '../../../core/services/registration.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { Event } from '../../../core/models/event.model';
+import { UiCard } from '../../../shared/ui-card/ui-card';
+import { UiButton } from '../../../shared/ui-button/ui-button';
+import { UiBadge } from '../../../shared/ui-badge/ui-badge';
 
 @Component({
   selector: 'app-event-detail',
-  imports: [RouterLink],
+  imports: [DatePipe, RouterLink, UiCard, UiButton, UiBadge],
   templateUrl: './event-detail.html',
   styleUrl: './event-detail.css'
 })
@@ -23,6 +27,11 @@ export class EventDetail implements OnInit {
   loading = signal(true);
   errorMessage = signal<string | null>(null);
   inscriptionMessage = signal<string | null>(null);
+  imageFailed = signal(false);
+
+  onImageError(): void {
+    this.imageFailed.set(true);
+  }
 
   ngOnInit(): void {
     this.eventService.getById(this.eventId).subscribe({
@@ -46,6 +55,10 @@ export class EventDetail implements OnInit {
   }
 
   onInscrire(): void {
+    if (this.authService.isAdmin()) {
+      this.inscriptionMessage.set('Les administrateurs ne peuvent pas s\'inscrire aux événements');
+      return;
+    }
     const userId = this.authService.currentUserId();
     if (!userId) {
       this.inscriptionMessage.set('Connectez-vous d\'abord');

@@ -1,0 +1,99 @@
+/* ============================================
+   UI Button — Shared Component
+   ============================================ */
+
+:host {
+  display: inline-block;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 12px 20px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  font-family: var(--font-family);
+  line-height: 1.4;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease, border-color 160ms ease, color 160ms ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* --- Primary (ember gradient) --- */
+.btn-primary {
+  background: var(--gradient-ember);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  box-shadow: var(--shadow-glow-ember);
+  filter: brightness(1.1);
+}
+
+.btn-primary:active:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.btn-primary:focus-visible {
+  outline-color: var(--flame-orange);
+}
+
+/* --- Danger --- */
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #d94335;
+  box-shadow: 0 0 16px rgba(194, 59, 46, 0.3);
+}
+
+.btn-danger:active:not(:disabled) {
+  background: #b33225;
+}
+
+.btn-danger:focus-visible {
+  outline-color: var(--danger);
+}
+
+/* --- Ghost --- */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.btn-ghost:active:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.btn-ghost:focus-visible {
+  outline-color: var(--ember);
+}
