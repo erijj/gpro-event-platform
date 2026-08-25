@@ -10,7 +10,7 @@
     <p class="state-loading">Chargement...</p>
   } @else if (errorMessage()) {
     <p class="state-error">{{ errorMessage() }}</p>
-  } @else if (inscriptions().length === 0) {
+  } @else if (displayedInscriptions().length === 0) {
     <p class="state-empty">Aucune inscription.</p>
   } @else {
     <div class="table-wrapper">
@@ -24,7 +24,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (r of inscriptions(); track r.id) {
+          @for (r of displayedInscriptions(); track r.id) {
             <tr>
               <td>{{ r.eventTitre }}</td>
               <td>{{ r.dateInscription | date:'dd/MM/yyyy HH:mm' }}</td>

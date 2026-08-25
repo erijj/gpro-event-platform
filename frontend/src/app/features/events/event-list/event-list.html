@@ -20,9 +20,40 @@
 }
 
 @if (!loading() && !errorMessage()) {
-  <div class="card-grid">
-    @for (event of events(); track event.id) {
-      <app-event-card [event]="event" />
-    }
+  <div class="filter-bar">
+    <input
+      class="filter-input"
+      type="text"
+      placeholder="Rechercher un événement..."
+      [value]="searchTerm()"
+      (input)="searchTerm.set($any($event.target).value)"
+    />
+    <select
+      class="filter-select"
+      [value]="selectedCategoryId() ?? ''"
+      (change)="onCategoryChange($any($event))"
+    >
+      <option [value]="">Toutes les catégories</option>
+      @for (cat of categories(); track cat.id) {
+        <option [value]="cat.id">{{ cat.libelle }}</option>
+      }
+    </select>
+    <input
+      class="filter-input"
+      type="date"
+      [value]="selectedDate()"
+      (input)="selectedDate.set($any($event.target).value)"
+    />
+    <button class="filter-reset" (click)="resetFilters()">Réinitialiser</button>
   </div>
+
+  @if (filteredEvents().length === 0 && events().length > 0) {
+    <p class="state-empty">Aucun événement ne correspond à votre recherche.</p>
+  } @else {
+    <div class="card-grid">
+      @for (event of filteredEvents(); track event.id) {
+        <app-event-card [event]="event" />
+      }
+    </div>
+  }
 }

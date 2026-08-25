@@ -35,6 +35,77 @@
   margin: 0;
 }
 
+/* --- Filter bar --- */
+.filter-bar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  animation: fadeInUp 350ms ease both;
+  animation-delay: 50ms;
+}
+
+.filter-input,
+.filter-select {
+  padding: 10px 14px;
+  font-size: var(--text-sm);
+  font-family: var(--font-family);
+  color: var(--text-primary);
+  background-color: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.filter-input::placeholder {
+  color: var(--text-muted);
+}
+
+.filter-input:hover:not(:focus),
+.filter-select:hover:not(:focus) {
+  border-color: var(--border-hover);
+}
+
+.filter-input:focus,
+.filter-select:focus {
+  border-color: var(--ember);
+  box-shadow: 0 0 0 3px var(--ember-subtle);
+}
+
+.filter-input[type="text"] {
+  flex: 1;
+  min-width: 0;
+}
+
+.filter-select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23b39a86' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.filter-reset {
+  padding: 10px 18px;
+  font-size: var(--text-sm);
+  font-family: var(--font-family);
+  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease;
+  white-space: nowrap;
+}
+
+.filter-reset:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+
 /* --- States --- */
 .state-loading {
   text-align: center;
@@ -50,6 +121,16 @@
   border-radius: var(--radius-sm);
   padding: var(--space-3) var(--space-4);
   font-size: var(--text-sm);
+}
+
+.state-empty {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: var(--space-12) 0;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  font-style: italic;
 }
 
 /* --- Card grid --- */
@@ -76,6 +157,10 @@
   .card-grid {
     gap: var(--space-4);
   }
+
+  .filter-bar {
+    gap: var(--space-2);
+  }
 }
 
 /* --- Responsive: Mobile --- */
@@ -95,5 +180,9 @@
   .card-grid {
     grid-template-columns: 1fr;
     gap: var(--space-4);
+  }
+
+  .filter-bar {
+    flex-direction: column;
   }
 }

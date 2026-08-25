@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit, effect } from '@angular/core';
+import { Component, inject, signal, computed, OnInit, effect } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RegistrationService } from '../../../core/services/registration.service';
 import { AuthService } from '../../../core/services/auth.service';
@@ -32,6 +32,21 @@ export class MesInscriptions implements OnInit {
       }
     });
   }
+
+  displayedInscriptions = computed(() => {
+    const all = this.inscriptions();
+    const latestByEvent = new Map<number, Registration>();
+
+    for (const r of all) {
+      const existing = latestByEvent.get(r.eventId);
+      if (!existing || new Date(r.dateInscription) > new Date(existing.dateInscription)) {
+        latestByEvent.set(r.eventId, r);
+      }
+    }
+
+    return Array.from(latestByEvent.values())
+      .sort((a, b) => new Date(b.dateInscription).getTime() - new Date(a.dateInscription).getTime());
+  });
 
   ngOnInit(): void {}
 
