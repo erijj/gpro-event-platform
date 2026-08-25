@@ -1,0 +1,35 @@
+@if (user(); as u) {
+  <div class="profile-page">
+    <ui-card>
+      <div class="profile-layout">
+        <div class="profile-sidebar">
+          <div class="profile-avatar">{{ initials() }}</div>
+          <h1 class="profile-name">{{ u.prenom }} {{ u.nom }}</h1>
+          <span class="profile-role">{{ roleLabel() }}</span>
+        </div>
+
+        <div class="profile-info">
+          <h2 class="profile-info-title">Informations du compte</h2>
+          <div class="profile-grid">
+            <div class="profile-detail">
+              <span class="profile-detail-label">Email</span>
+              <span class="profile-detail-value">{{ u.email }}</span>
+            </div>
+            <div class="profile-detail">
+              <span class="profile-detail-label">Identifiant</span>
+              <span class="profile-detail-value">#{{ u.userId }}</span>
+            </div>
+            <div class="profile-detail">
+              <span class="profile-detail-label">Rôle</span>
+              <span class="profile-detail-value">{{ u.role }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ui-card>
+  </div>
+} @else {
+  <div class="profile-page">
+    <p class="profile-fallback">Aucune information de profil disponible.</p>
+  </div>
+}
