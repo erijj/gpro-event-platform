@@ -4,7 +4,13 @@
 
 /* --- Page particles background --- */
 .page-particles {
-  height: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
   overflow: hidden;
 }
 
@@ -12,27 +18,106 @@
 .hero-band {
   position: relative;
   z-index: 1;
-  height: 280px;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
   overflow: hidden;
   border-radius: var(--radius-lg);
   margin-bottom: var(--space-8);
+  /* Fond très subtil, sans backdrop-filter, pour laisser transparaître les particules */
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  height: 100%;
-  padding: 0 var(--space-8);
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+  gap: var(--space-6);
 }
 
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* --- Style Inspiration pour le titre --- */
 .hero-title {
-  font-size: var(--text-3xl);
-  font-weight: 700;
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 400;
   color: var(--text-primary);
   margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.hero-title-accent {
+  font-style: italic;
+  font-weight: 300;
+  background: var(--gradient-ember);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-tagline {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  max-width: 550px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* --- Scroll indicator --- */
+.scroll-indicator {
+  position: absolute;
+  bottom: var(--space-4);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.scroll-text {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.scroll-arrow {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-arrow {
+    animation: none;
+  }
 }
 
 /* --- Filter bar --- */
@@ -40,15 +125,21 @@
   position: relative;
   z-index: 1;
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-3);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
+  background: rgba(25, 20, 18, 0.5);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
   animation: fadeInUp 350ms ease both;
   animation-delay: 50ms;
 }
 
 .filter-input,
 .filter-select {
-  padding: 10px 14px;
+  padding: 12px 16px;
   font-size: var(--text-sm);
   font-family: var(--font-family);
   color: var(--text-primary);
@@ -76,7 +167,11 @@
 
 .filter-input[type="text"] {
   flex: 1;
-  min-width: 0;
+  min-width: 220px;
+}
+
+.filter-input[type="date"] {
+  min-width: 160px;
 }
 
 .filter-select {
@@ -86,10 +181,11 @@
   background-repeat: no-repeat;
   background-position: right 14px center;
   padding-right: 36px;
+  min-width: 180px;
 }
 
 .filter-reset {
-  padding: 10px 18px;
+  padding: 12px 20px;
   font-size: var(--text-sm);
   font-family: var(--font-family);
   color: var(--text-secondary);
@@ -97,13 +193,14 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: border-color 160ms ease, color 160ms ease;
+  transition: all 160ms ease;
   white-space: nowrap;
 }
 
 .filter-reset:hover {
   border-color: var(--border-hover);
   color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* --- States --- */
@@ -138,43 +235,35 @@
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: var(--space-6);
   animation: fadeInUp 350ms ease both;
   animation-delay: 100ms;
 }
 
-/* --- Responsive: Tablet --- */
+/* --- Responsive: Tablet & Mobile --- */
 @media (max-width: 1199px) {
   .hero-band {
-    height: 220px;
-  }
-
-  .hero-content {
-    padding: 0 var(--space-6);
+    min-height: 400px;
+    padding: var(--space-10) var(--space-4);
   }
 
   .card-grid {
     gap: var(--space-4);
   }
-
-  .filter-bar {
-    gap: var(--space-2);
-  }
 }
 
-/* --- Responsive: Mobile --- */
 @media (max-width: 767px) {
   .hero-band {
-    height: 180px;
-  }
-
-  .hero-content {
-    padding: 0 var(--space-4);
+    min-height: 340px;
   }
 
   .hero-title {
-    font-size: var(--text-2xl);
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+
+  .hero-tagline {
+    font-size: var(--text-xs);
   }
 
   .card-grid {
@@ -184,5 +273,12 @@
 
   .filter-bar {
     flex-direction: column;
+  }
+
+  .filter-input[type="text"],
+  .filter-input[type="date"],
+  .filter-select,
+  .filter-reset {
+    width: 100%;
   }
 }
