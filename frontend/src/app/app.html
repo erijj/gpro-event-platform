@@ -18,6 +18,7 @@
     @if (authService.isLoggedIn()) {
       <span class="header-user">{{ authService.currentUser()?.prenom }} {{ authService.currentUser()?.nom }}</span>
       <span class="header-role">{{ authService.currentUserRole() }}</span>
+      <a routerLink="/profil" class="nav-link">Mon Profil</a>
       <button (click)="onLogout()" aria-label="Se déconnecter">Déconnexion</button>
     } @else {
       <a routerLink="/login" class="nav-link">Se connecter</a>

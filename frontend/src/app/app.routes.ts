@@ -14,6 +14,7 @@ import { UserEdit } from './features/users/user-edit/user-edit';
 import { UserCreate } from './features/users/user-create/user-create';
 import { MesInscriptions } from './features/registrations/mes-inscriptions/mes-inscriptions';
 import { Login } from './features/auth/login/login';
+import { Profile } from './features/profile/profile/profile';
 import { authGuard } from './core/guards/auth-guard';
 import { adminGuard } from './core/guards/admin-guard';
 
@@ -42,6 +43,9 @@ export const routes: Routes = [
   // --- Inscriptions (réservé connecté) ---
   { path: 'registrations', component: RegistrationList, canActivate: [adminGuard] },
   { path: 'mes-inscriptions', component: MesInscriptions, canActivate: [authGuard] },
+
+  // --- Profil (réservé connecté) ---
+  { path: 'profil', component: Profile, canActivate: [authGuard] },
 
   // --- Redirection par défaut ---
   { path: '', redirectTo: 'events', pathMatch: 'full' }
