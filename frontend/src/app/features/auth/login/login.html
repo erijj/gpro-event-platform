@@ -49,6 +49,14 @@
       <ui-button type="submit" [disabled]="loading()">
         {{ loading() ? 'Connexion...' : 'Se connecter' }}
       </ui-button>
+
+      <div class="login-divider">
+        <span>ou</span>
+      </div>
+
+      <button type="button" class="guest-button" (click)="onContinueAsGuest()">
+        Continuer en tant qu'invité
+      </button>
     </form>
   </ui-card>
 </div>

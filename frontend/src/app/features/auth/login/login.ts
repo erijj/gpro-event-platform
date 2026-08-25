@@ -47,4 +47,8 @@ export class Login {
       },
     });
   }
+
+  onContinueAsGuest(): void {
+    this.router.navigate(['/events']);
+  }
 }
