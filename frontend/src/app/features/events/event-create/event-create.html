@@ -38,9 +38,9 @@
         <div class="form-group">
           <label class="form-label">Catégorie</label>
           <select formControlName="categoryId" class="form-select">
-            <option [value]="null">-- Choisir --</option>
+            <option [ngValue]="null" disabled>-- Choisir --</option>
             @for (cat of categories(); track cat.id) {
-              <option [value]="cat.id">{{ cat.libelle }}</option>
+              <option [ngValue]="cat.id">{{ cat.libelle }}</option>
             }
           </select>
         </div>
