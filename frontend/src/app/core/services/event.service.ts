@@ -25,6 +25,7 @@ export class EventService {
     lieu: string;
     capaciteMax: number;
     categoryId: number;
+    image?: string | null;
   }): Observable<Event> {
     return this.http.post<Event>(this.baseUrl, event);
  }
@@ -35,6 +36,7 @@ export class EventService {
   lieu: string;
   capaciteMax: number;
   categoryId: number;
+  image?: string | null;
 }): Observable<Event> {
   return this.http.put<Event>(`${this.baseUrl}/${id}`, event);
 }
