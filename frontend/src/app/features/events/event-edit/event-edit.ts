@@ -32,7 +32,8 @@ export class EventEdit implements OnInit {
     lieu: ['', Validators.required],
     capaciteMax: [1, [Validators.required, Validators.min(1)]],
     categoryId: [null as number | null, Validators.required],
-    image: ['']
+    image: [''],
+    statut: ['PLANIFIE' as string, Validators.required]
   });
 
   ngOnInit(): void {
@@ -49,7 +50,8 @@ export class EventEdit implements OnInit {
           lieu: data.lieu,
           capaciteMax: data.capaciteMax,
           categoryId: data.category.id,
-          image: data.image ?? ''
+          image: data.image ?? '',
+          statut: data.statut
         });
         this.loading.set(false);
       },
@@ -70,7 +72,8 @@ export class EventEdit implements OnInit {
       lieu: this.form.value.lieu!,
       capaciteMax: this.form.value.capaciteMax!,
       categoryId: this.form.value.categoryId!,
-      image: this.form.value.image || null
+      image: this.form.value.image || null,
+      statut: this.form.value.statut!
     }).subscribe({
       next: () => this.router.navigate(['/events', this.eventId]),
       error: () => this.errorMessage.set('Erreur lors de la modification')

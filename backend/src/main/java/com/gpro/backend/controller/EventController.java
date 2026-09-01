@@ -56,7 +56,8 @@ public ResponseEntity<EventDto> update(@PathVariable Long id, @Valid @RequestBod
             request.getLieu(),
             request.getCapaciteMax(),
             request.getImage(),
-            request.getCategoryId()
+            request.getCategoryId(),
+            request.getStatut()
     );
     return ResponseEntity.ok(updated);
 }

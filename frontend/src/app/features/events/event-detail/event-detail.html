@@ -41,7 +41,7 @@
         <div class="detail-item">
           <span class="detail-label">Statut</span>
           <ui-badge [variant]="event()!.statut === 'PLANIFIE' ? 'info' : event()!.statut === 'EN_COURS' ? 'warning' : event()!.statut === 'TERMINE' ? 'success' : 'danger'">
-            {{ event()!.statut }}
+            {{ statutLabel(event()!.statut) }}
           </ui-badge>
         </div>
       </div>
@@ -74,8 +74,12 @@
       </div>
     }
 
-    @if (authService.currentUserId() && !authService.isAdmin() && event()!.placesRestantes > 0) {
+    @if (authService.currentUserId() && !authService.isAdmin()
+         && event()!.placesRestantes > 0
+         && (event()!.statut === 'PLANIFIE' || event()!.statut === 'EN_COURS')) {
       <ui-button variant="primary" (click)="onInscrire()">S'inscrire</ui-button>
+    } @else if (event()!.statut === 'TERMINE' || event()!.statut === 'ANNULE') {
+      <p class="state-full">Inscriptions closes pour cet événement</p>
     } @else if (event()!.placesRestantes === 0) {
       <p class="state-full">Plus de places disponibles</p>
     }

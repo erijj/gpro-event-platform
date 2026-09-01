@@ -3,6 +3,7 @@ package com.gpro.backend.dto.request;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
@@ -31,4 +32,7 @@ public class CreateEventRequest {
 
     @NotNull(message = "La catégorie est obligatoire")
     private Long categoryId;
+
+    @Pattern(regexp = "PLANIFIE|EN_COURS|TERMINE|ANNULE", message = "Statut invalide")
+    private String statut;
 }

@@ -37,6 +37,7 @@ export class EventService {
   capaciteMax: number;
   categoryId: number;
   image?: string | null;
+  statut: string;
 }): Observable<Event> {
   return this.http.put<Event>(`${this.baseUrl}/${id}`, event);
 }

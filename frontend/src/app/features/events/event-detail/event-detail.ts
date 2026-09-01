@@ -52,6 +52,16 @@ export class EventDetail implements OnInit {
     return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(e.lieu)}`;
   });
 
+  statutLabel(statut: string): string {
+    switch (statut) {
+      case 'PLANIFIE': return 'Planifié';
+      case 'EN_COURS': return 'En cours';
+      case 'TERMINE': return 'Terminé';
+      case 'ANNULE': return 'Annulé';
+      default: return statut;
+    }
+  }
+
   ngOnInit(): void {
     this.eventService.getById(this.eventId).subscribe({
       next: (data) => {

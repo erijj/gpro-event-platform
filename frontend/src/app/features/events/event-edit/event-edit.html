@@ -50,6 +50,18 @@
           </div>
         </div>
 
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Statut</label>
+            <select formControlName="statut" class="form-select">
+              <option value="PLANIFIE">Planifié</option>
+              <option value="EN_COURS">En cours</option>
+              <option value="TERMINE">Terminé</option>
+              <option value="ANNULE">Annulé</option>
+            </select>
+          </div>
+        </div>
+
         <div class="form-actions">
           <ui-button type="submit" [disabled]="form.invalid">Enregistrer</ui-button>
         </div>

@@ -63,7 +63,7 @@ public class EventService {
 
 @Transactional
 public EventDto update(Long id, String titre, String description, LocalDateTime dateHeure,
-                        String lieu, Integer capaciteMax, String image, Long categoryId) {
+                        String lieu, Integer capaciteMax, String image, Long categoryId, String statut) {
 
     Event event = eventRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Événement introuvable avec l'id : " + id));
@@ -77,6 +77,10 @@ public EventDto update(Long id, String titre, String description, LocalDateTime 
     event.setLieu(lieu);
     event.setImage(image);
     event.setCategory(category);
+
+    if (statut != null && !statut.isBlank()) {
+        event.setStatut(statut);
+    }
 
     // Si la capacité max change, on ajuste placesRestantes en conséquence
     // pour ne pas perdre les inscriptions déjà comptabilisées
