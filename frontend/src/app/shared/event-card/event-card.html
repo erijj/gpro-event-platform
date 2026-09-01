@@ -17,7 +17,7 @@
 
     <div class="event-card-footer">
       <ui-badge [variant]="event().statut === 'PLANIFIE' ? 'info' : event().statut === 'EN_COURS' ? 'warning' : event().statut === 'TERMINE' ? 'success' : 'danger'">
-        {{ event().statut }}
+        {{ statutLabel(event().statut) }}
       </ui-badge>
       <span class="event-card-capacity">{{ event().placesRestantes }} / {{ event().capaciteMax }} places</span>
     </div>
